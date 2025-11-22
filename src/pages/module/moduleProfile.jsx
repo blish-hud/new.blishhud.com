@@ -110,19 +110,6 @@ export default function ModuleProfile({ namespace, module }) {
                     </div>
                     
                     <div class="box external-source" dangerouslySetInnerHTML={{ __html: module.ProfileSource ? module.ProfileSource : "<center><i>No Description</i></center>" }}></div>
-
-                    { false /* && module.Downloads >= 500 */ && 
-                        <div class="card" style={{ marginTop: "1em", padding: "0" }}>
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    Module Downloads
-                                </p>
-                            </header>
-                            <div class="card-content" style={{ padding: "0" }}>
-                                <iframe width="100%" height="470px" scrolling="no" src={ `https://dashboards.blishhud.com/embed/query/21/visualization/32?api_key=WgbLIl20YAQQvaGy8khDWnCQSJ3dRt3loEJ1boip&p_$module_namespaces=${namespace}&p_RelativeDaysSince=15&hide_parameters=true&hide_header=true&hide_link=true` } style = {{ overflow: 'hidden' }} />
-                            </div>
-                        </div>
-                    }
                 </section>
                 
                 <section class="column is-one-third">
