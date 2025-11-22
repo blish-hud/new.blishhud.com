@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '@theme/Layout';
 import ModuleCard from './module/moduleCard';
 import ModuleProfile from './module/moduleProfile';
@@ -8,50 +8,41 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import Loading from '@theme/Loading';
 
-/*
-
-    I apologize for my poor state handling in all of this.  React is clearly not something I'm super familiar with.
-    Please don't hesitate to recommend improvements.
-        — Freesnöw
-
-*/
-
-function AllModules(modules, [sortMethod, setSortMethod], isAuthor = false) {
+function ModuleList({ modules, sortMethod, onSortChange, isAuthor = false }) {
     const context = useDocusaurusContext();
     const { siteConfig = {} } = context;
 
-    context.updateSortOrder = (newSortOrder) => setSortMethod(newSortOrder.target.value);
-    
-    context.doSort = function (modules) {
+    const sortedModules = useMemo(() => {
+        const sortableModules = [...modules];
+
         switch (sortMethod) {
             case "Downloads":
-                return modules.sort((a, b) => b.Downloads - a.Downloads);
+                return sortableModules.sort((a, b) => b.Downloads - a.Downloads);
             case "A to Z":
-                return modules.sort((a, b) => a.Name.localeCompare(b.Name));
+                return sortableModules.sort((a, b) => a.Name.localeCompare(b.Name));
             case "Z to A":
-                return modules.sort((a, b) => b.Name.localeCompare(a.Name));
+                return sortableModules.sort((a, b) => b.Name.localeCompare(a.Name));
             case "Last Update":
-                return modules.sort((a, b) => new Date(b.LastUpdate) - new Date(a.LastUpdate));
+                return sortableModules.sort((a, b) => new Date(b.LastUpdate) - new Date(a.LastUpdate));
             default:
-                return modules;
+                return sortableModules;
         }
-    }
+    }, [modules, sortMethod]);
 
-    var pageTitle = "Modules";
-    var pageDescription = siteConfig.tagline;
-    var pageImage = null;
+    let pageTitle = "Modules";
+    let pageDescription = siteConfig.tagline;
+    let pageImage = null;
 
     if (isAuthor) {
-        if (modules.length > 0) {
-            var authorName = modules[0].AuthorName;
+        if (sortedModules.length > 0) {
+            const authorName = sortedModules[0].AuthorName;
 
             pageTitle = `Modules by ${authorName}`;
-
-            pageDescription = modules.length > 1 
-                ? `Check out ${modules.length} modules developed by ${authorName}.`
+            pageDescription = sortedModules.length > 1
+                ? `Check out ${sortedModules.length} modules developed by ${authorName}.`
                 : `Check out modules developed by ${authorName}.`;
 
-            pageImage = modules[0].AuthorAvatar;
+            pageImage = sortedModules[0].AuthorAvatar;
         } else {
             pageTitle = "Unknown Author";
             pageDescription = "No modules could be found.";
@@ -60,12 +51,12 @@ function AllModules(modules, [sortMethod, setSortMethod], isAuthor = false) {
 
     return (
         <Layout
-            title={ pageTitle }
-            description={ pageDescription }>
+            title={pageTitle}
+            description={pageDescription}>
             <Head>
                 <meta name="keywords" content="Guild Wars 2, gw2, Blish, HUD, bhud, TacO, Overlay" />
-                { pageImage != null &&
-                    <meta name="og:image" content={ pageImage } />
+                {pageImage != null &&
+                    <meta name="og:image" content={pageImage} />
                 }
             </Head>
             <div className="module-content">
@@ -76,7 +67,7 @@ function AllModules(modules, [sortMethod, setSortMethod], isAuthor = false) {
                         </a>
                     </p>
                     <div className="select is-right">
-                        <select id="sortOrder" value={context.sortMethod} onChange={context.updateSortOrder}>
+                        <select id="sortOrder" value={sortMethod} onChange={onSortChange}>
                             <option>Downloads</option>
                             <option>A to Z</option>
                             <option>Z to A</option>
@@ -86,10 +77,10 @@ function AllModules(modules, [sortMethod, setSortMethod], isAuthor = false) {
                 </div>
                 <div className="module-cards">
                     <BrowserOnly>{() =>
-                        modules && context.doSort(modules).map(module => (
-                                <ModuleCard key={module.Namespace} module={module} />
-                            ))
-                        }
+                        sortedModules.map(module => (
+                            <ModuleCard key={module.Namespace} module={module} />
+                        ))
+                    }
                     </BrowserOnly>
                 </div>
             </div>
@@ -97,16 +88,13 @@ function AllModules(modules, [sortMethod, setSortMethod], isAuthor = false) {
     );
 }
 
-function Module(namespace, module) {
-    const context = useDocusaurusContext();
-    const { siteConfig = {} } = context;
-
+function ModuleProfilePage({ namespace, module }) {
     return (
         <Layout
             title={`${module.Name} Module`}
             description={`${module.Summary}`}>
             <BrowserOnly>
-                {() => 
+                {() =>
                     <Head>
                         <meta name="keywords" content={`${namespace}, ${module.Name}, Module, Guild Wars 2, gw2, Blish, HUD, bhud, TacO, Overlay`} />
                         <meta name="og:image" content={`https://pkgs.blishhud.com/metadata/img/module/${namespace}.png`} />
@@ -114,7 +102,7 @@ function Module(namespace, module) {
                 }
             </BrowserOnly>
             <BrowserOnly>
-                {() => 
+                {() =>
                     <div className="module-content">
                         <ModuleProfile namespace={namespace} module={module} />
                     </div>
@@ -125,10 +113,11 @@ function Module(namespace, module) {
 }
 
 function MdlLoading() {
-    // Just empty layout is more than fine.
     return (
         <Layout>
-                
+            <div className="module-content">
+                <Loading />
+            </div>
         </Layout>
     );
 }
@@ -138,71 +127,103 @@ function Modules() {
         return MdlLoading();
     }
 
+    const searchParams = new URLSearchParams(window.location.search);
+    const moduleNamespace = searchParams.get('module');
+    const moduleAuthor = searchParams.get('author');
+
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [modules, setModules] = useState(null);
+    const [modules, setModules] = useState([]);
     const [module, setModule] = useState(null);
     const [sortMethod, setSortMethod] = useState("Downloads");
 
-    var urlParams = new URLSearchParams(window.location.search);
-    var moduleNamespace = urlParams.get('module');
-    var moduleAuthor = urlParams.get('author');
-
     useEffect(() => {
-        if (moduleNamespace == null) {
-            // Load all modules
-            fetch("https://pkgs.blishhud.com/metadata/all.json")
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        setIsLoaded(true);
-                        setModules(result);
-                    },
-                    (error) => {
-                        setIsLoaded(true);
-                        setError(error);
-                    })
-        } else {
-            // Load module profile
-            fetch(`https://pkgs.blishhud.com/metadata/${moduleNamespace}.json`)
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        setIsLoaded(true);
-                        setModule(result);
-                    },
-                    (error) => {
-                        setIsLoaded(true);
-                        setError(error);
-                    })
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const fetchData = async () => {
+            try {
+                setIsLoaded(false);
+                setError(null);
+                setModule(null);
+
+                if (moduleNamespace == null) {
+                    const response = await fetch("https://pkgs.blishhud.com/metadata/all.json", { signal });
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to load module list (${response.status})`);
+                    }
+
+                    const result = await response.json();
+                    setModules(result);
+                } else {
+                    const response = await fetch(`https://pkgs.blishhud.com/metadata/${moduleNamespace}.json`, { signal });
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to load module profile (${response.status})`);
+                    }
+
+                    const result = await response.json();
+                    setModule(result);
+                }
+            } catch (err) {
+                if (err.name !== 'AbortError') {
+                    setError(err);
+                }
+            } finally {
+                setIsLoaded(true);
+            }
+        };
+
+        fetchData();
+
+        return () => controller.abort();
+    }, [moduleNamespace]);
+
+    const filteredModules = useMemo(() => {
+        if (moduleNamespace != null || !modules) {
+            return [];
         }
-    }, [isLoaded]); // uhh this is getting called twice on each page.  Not sure how else to make this smooth between module profiles and the full listing, though.
+
+        if (!moduleAuthor) {
+            return modules;
+        }
+
+        return modules.filter(module =>
+            !module.AuthorName.localeCompare(moduleAuthor, undefined, { sensitivity: 'base' })
+        );
+    }, [moduleAuthor, moduleNamespace, modules]);
 
     if (error) {
-        return <label>Error loading: {error}</label>
-    } else if (!isLoaded) {
-        return MdlLoading();
-    } else {
-        if (moduleNamespace == null) {
-            if (modules != null) {
-                if (moduleAuthor == null) {
-                    return AllModules(modules, [sortMethod, setSortMethod]);
-                } else {
-                    return AllModules(modules.filter(function(module) {
-                        return !module.AuthorName.localeCompare(moduleAuthor, undefined, { sensitivity: 'base' });
-                    }), [sortMethod, setSortMethod], true);
-                }
-            } else {
-                setIsLoaded(false);
-            }
-        } else {
-            if (module != null) {
-                return Module(moduleNamespace, module);
-            } else {
-                setIsLoaded(false);
-            }
-        }
+        return (
+            <Layout>
+                <div className="module-content">
+                    <p>Error loading: {error.message}</p>
+                </div>
+            </Layout>
+        );
     }
+
+    if (!isLoaded) {
+        return MdlLoading();
+    }
+
+    if (moduleNamespace == null) {
+        return (
+            <ModuleList
+                modules={filteredModules}
+                sortMethod={sortMethod}
+                onSortChange={(event) => setSortMethod(event.target.value)}
+                isAuthor={moduleAuthor != null}
+            />
+        );
+    }
+
+    if (module != null) {
+        return <ModuleProfilePage namespace={moduleNamespace} module={module} />;
+    }
+
+    return MdlLoading();
 }
 
 export default Modules;
