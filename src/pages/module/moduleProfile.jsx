@@ -226,7 +226,7 @@ export default function ModuleProfile({ namespace, module }) {
                                 }
                                 { module.AuthorProfile.KofiProfile != null &&
                                     <div class="field has-addons">
-                                        <iframe id='kofiframe' src={`https://ko-fi.com/${module.AuthorProfile.KofiProfile}/?hidefeed=true&widget=true&embed=true&preview=true`} style={{ border: "none", width: "100%", padding: "4px", background: "#f9f9f9", borderRadius: "4px" }} height='660' title={`${module.AuthorProfile.KofiProfile}`}></iframe>
+                                        <iframe id='kofiframe' src={`https://ko-fi.com/${module.AuthorProfile.KofiProfile}/?hidefeed=true&widget=true&embed=true&preview=true`} style={{ border: "none", width: "100%", padding: "4px", background: "#f9f9f9", borderRadius: "4px", "min-width": "300px" }} height='660' title={`${module.AuthorProfile.KofiProfile}`}></iframe>
                                     </div>
                                 }
                             </div>
