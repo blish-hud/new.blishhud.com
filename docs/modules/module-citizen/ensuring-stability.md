@@ -3,51 +3,43 @@ id: ensuring-stability
 title: Ensuring Stability
 ---
 
-While Blish HUD will do everything it can to avoid crashing when modules misbehave, it is important that your module does its part to catch and handle exceptions as appropriate.
+While Blish HUD does everything it can to avoid crashing when modules misbehave, your module should also catch and handle exceptions appropriately.
 
-With our userbase numbering in the tens of thousands, your module has the potential to run on a wide range of systems with various specs, anti-virus, and other unique environmental issues.  It is important to ensure that your module is resilient to these issues.
-
-## Make use of contingency notifications
-
-Blish HUD provides a standardized way of notifying users when there is an issue beyond our control (we'll refer to these as environmental issues) that significantly impacts using Blish HUD.
-
-Found within our Debug namespace you'll find a way to make these calls: `Debug.Contingency`.  Soon we'll extend this to allow for custom notifications.  In the meantime, however, we have several common ones including notifications when a file save is blocked via permissions or otherwise.  These show a popup which the user will see at most once per session indicating the issue, offering a solution, and linking them to the relevant troubleshooting article on our website.  We have found these to be incredibly effective at reducing the number of issues surrounding common environmental issues such as anti-virus, etc.
-
-These calls are meant for issues that would impact Blish HUD as a whole and require immediate attention to resolve issues.  It is not meant for minor or optional module features.  They show a disruptive popup that users will not want to see regularly as they interrupt gameplay.
+With tens of thousands of users, your module will run on many system configurations, security products, and other environmental variables.  Design it to be resilient to these differences.
 
 ## Handle exceptions when working with external resources
 
-Sometimes you need to read a file, make a web request, etc. but what happens if the file you're attempting to read is unexpectedly not there or a the web server hosting the API you're making a call to is down?
+Whenever you read a file, make a web request, or use any other external resource, be prepared for the resource to be unavailable.
 
-In any of these scenarios where an external resource is referenced please ensure you:
-- **Wrap your calls with try/catch statements** and handle exceptions appropriately.
-- **Notify your user of the fault if it is critical to your modules use.**  Especially for features that are non-critical, it is good to show in the UI when a feature may not be available because an external call failed (and details may allow them to resolve the issue themselves).
-- **Include graceful fallbacks** such as disabling certain features (with a note if you can) if something fails to load.  Users are often confused when something is temporarily unavailable without notice because they don't necessarily know that something failed so the clearer the notice, the better.
-- **Log your issues**.  Data pulled from the web or local disk can be caused by a number of factors, but ensure it is logged using your logger.  Avoid using ERROR or FATAL for these sorts of logging entries as it will flood you with reports in Sentry for what is likely an environmental issue that you can't directly solve and that you've already caught and handled.
-- **Implement *reasonable* retry logic.**  Avoid thrashing your users' system with endless retry attempts.  Instead, if something is likely to be a short blip, consider retrying either once more after a short wait, or retrying on a regular interval several minutes apart.  This allows your module to "self-heal" if at all possible without user interaction and without degrading system performance.
+In these scenarios:
+- **Wrap calls in try/catch blocks** and handle exceptions appropriately.
+- **Notify the user when a failure blocks core functionality.**  For non-critical features, indicate in the UI when a feature is unavailable because an external call failed (and provide details if possible).
+- **Provide graceful fallbacks** such as disabling affected features with a note if something fails to load.  Clear messaging prevents confusion when something is temporarily unavailable.
+- **Log the issue** using your logger.  Avoid `ERROR` or `FATAL` levels for environmental failures you are already handling to prevent flooding Sentry with reports you cannot directly resolve.
+- **Use reasonable retry logic.**  If a failure may be transient, consider a limited retry after a delay or on a spaced interval.  This allows your module to self-heal without thrashing the user's system.
 
 :::info
-Use applications such as Fiddler to disable web API traffic/emulate intermittent disruptions or try corrupting your settings files.  These tests can prove valuable in identifying gaps in your exception handling.
+Use tools like Fiddler to block web API traffic corrupt your settings files to test your exception handling.  These exercises help surface gaps before users encounter them.
 
-The Guild Wars 2 API has had several notable periods of downtime or other disruptions over the years.  It's always better to prepare now than have to deploy an emergency fix down the road when thousands of users run into issues at once.
+The Guild Wars 2 API has experienced notable downtime and disruptions over the years.  Preparing now avoids emergency fixes later when thousands of users are affected at once.
 :::
 
 ## Look out for symptoms of anti-virus
 
 :::caution To preface
-We **do not** attempt to circumvent anti-virus or other security software.  Instead, we work to try to identify when it impedes us and notify the user so that they can address it themselves.
+We **do not** attempt to circumvent anti-virus or other security software.  Instead, we try to detect when it interferes and notify the user so they can address it.
 
-We will also submit our compiled assemblies to Anti-Virus vendors for review and for approval when there are repeat issues from the same vendor so that they can manually approve it.
+We also submit our compiled assemblies to anti-virus vendors for review when we see repeat issues so they can manually approve them.
 :::
 
-Sometimes users have an anti-virus that, despite our best efforts to sign and submit our releases for review, will get blocked.  These days many anti-virus platforms block *behaviors* instead of the applications themselves.  Common examples are:
+Even with signed releases, some anti-virus solutions may still block behavior.  Common examples include:
 
 ### Failed Web Requests
-Trivial web requests may return unexpected exceptions if actively blocked by outbound software firewalls.
+Trivial web requests can throw unexpected exceptions if outbound requests are blocked by security software.
 
-As with all web requests made, you should wrap them in try/catch statements and handle any exceptions.  For failed requests that specifically return HRResult `-2147467259`, you should call `Debug.Contingency.NotifyHttpAccessDenied` to notify the user.  Web requests that fail in this way to the GW2 API via the managed client already are wrapped and checked for this exception.
+Wrap all web requests in try/catch blocks and handle exceptions.  When a request specifically returns `HRResult -2147467259`, call `Debug.Contingency.NotifyHttpAccessDenied` to notify the user.  Managed Guild Wars 2 API client calls already handle this check.
 
 ### Failed File System Read/Writes
-Basic file reads (even to files you've written to disk) or writes may be blocked - even to directories that other modules have successfully written to.
+Simple file reads or writes—even to files your module created—can be blocked, including directories other modules write to successfully.
 
-As with all file reads and writes, you should wrap them in try/catch statements and handle any exceptions.  For failed file reads and writes `UnauthorizedAccessException` is what is most often returned for this particular issue and you should use `Debug.Contingency.NotifyFileSaveAccessDenied` to notify the user when this specific exception is thrown while handling IO.
+Wrap all file IO in try/catch blocks and handle exceptions.  For file operations that throw `UnauthorizedAccessException`, use `Debug.Contingency.NotifyFileSaveAccessDenied` to alert the user when IO is blocked.

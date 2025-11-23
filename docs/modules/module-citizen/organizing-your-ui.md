@@ -3,79 +3,75 @@ id: friendly-ui-ux
 title: User-Friendly UI/UX
 ---
 
-There are many ways to build your UI, but with a finite amount of screenspace available and with our users in mind, there are many things to consider to ensure your module gives your users what they need without feeling overwhelming or out of place.
-
-To help ensure that our UI remains intuitive, consistent, and friendly to our users, we provide this UI guide.
+There are many ways to build a UI, but with limited screen space and users at the forefront, keep your module focused and consistent.  This guide shares how to keep Blish HUD UI intuitive and friendly.
 
 ## Mimic in-game UI/UX when reasonable
 
-When building your UI, it is often best to mimic the in-game designs and layouts where possible.  This is not to say that the in-game designs are the most intuitive or practical, but Guild Wars 2 players will already be familiar with them and have a certain expectation of how they work.  This means:
-- ✅ **DO** consider replicating an existing in-game UI element rather than inventing your own.
-- ✅ **DO** consider expanding on an existing control with new features as long as those features are intuitive and discoverable (example: adding menu separators to context menus which have no in-game equivalent).
-- ✅ **DO** use game-sourced textures when building custom controls to help ensure that they fit with the rest of the game and Blish HUD.
-- ✅ **DO** consider getting layout inspiration from in-game panels when organizing your own views.
-- ✅ **DO** try to be consistent - not only within your own module, but with other modules where common UX patterns emerge. 
-- ❌ **DO NOT** create custom controls which appear like in-game controls but differ substantially in functionality. 
+*Where practical*, mirror in-game designs and layouts.  Guild Wars 2 players already understand them and expect certain behaviors.  Keep in mind:
+- ✅ **DO** consider replicating an existing in-game UI element rather than inventing a new one.
+- ✅ **DO** extend existing controls with intuitive, discoverable features (for example, adding menu separators to context menus without an in-game equivalent).
+- ✅ **DO** use game-sourced textures when building custom controls so they fit with the game and Blish HUD.
+- ✅ **DO** look to in-game panels for layout inspiration when organizing views.
+- ✅ **DO** aim for consistency—within your module and across modules when common UX patterns emerge.
+- ❌ **DO NOT** create custom controls that mimic in-game visuals but behave differently.
 
-Please don't mimic to the point of creating user hostile UI/UX, but instead use the established in-game UI as a reference when building your own.  
+Please avoid mimicking to the point of recreating user-hostile UI/UX.  Use the established in-game UI as a reference, not a constraint.
 
-**The bottom line:** use your best judgement to avoid making your users have to learn a new UI or UX while avoiding tedious pitfalls found in the existing in-game UI.
+**Bottom line:** help users avoid relearning UI conventions while steering clear of known in-game pitfalls.
 
 ## 'Screen' Controls
 
-Some modules provide UI elements which float within the root `Screen` container instead of within a window.  These controls can be useful for showing users information on the fly or giving them buttons to activate certain module features.  When placing controls within the root `Screen` container:
-- ✅ **DO** ensure that your UI elements can be repositioned.  Users will have different UI setups and statically placed UI elements may cover their in-game UI or even other module UI elements.
-- ✅ **DO** auto-hide your controls when the user is on the character select screen, loading screen, during vistas, or has the fullscreen map open if your controls are not relevant.  You can check with `GameService.GameIntegration.Gw2Instance.IsInGame && !GameService.Gw2Mumble.UI.IsMapOpen` in your update or draw calls.
-- ❌ **DO NOT** block mouse input with your control unless it is a UI element intended for interaction (a button, etc.).
+Some modules place UI elements inside the root `Screen` container rather than inside a window.  These controls can surface quick info or actions.  When placing controls on the root `Screen`:
+- ✅ **DO** ensure elements can be repositioned.  Users have different UI layouts, and static placements may cover in-game or other module UI.
+- ✅ **DO** auto-hide controls during character select, loading, vistas, or when the fullscreen map is open if they are not relevant.  You can check with `GameService.GameIntegration.Gw2Instance.IsInGame && !GameService.Gw2Mumble.UI.IsMapOpen` in update or draw calls.
+- ❌ **DO NOT** block mouse input with controls unless they are meant for interaction (such as a button).
 
 ## Module Settings
 
-Every module is different and some may require unique layouts to ensure their settings are more intuitively presented and managed.
+Every module is different, so choose a layout that makes settings easy to find and manage.
 
 **When you have few settings:**
-- ✅ **DO** use the built-in SettingsView which by default will show your settings on the module page.
+- ✅ **DO** use the built-in `SettingsView`, which by default shows your settings on the module page.
 
 **When using custom settings views or windows:**
-- ✅ **DO** use a custom window to show your setting in.
-- ✅ **DO** show a button on the module settings panel to link to your settings so that they're easy to discover (users will look on the module page first for settings).
+- ✅ **DO** present settings in a custom window.
+- ✅ **DO** include a button on the module settings panel that opens your settings so users can find them easily (they will look on the module page first).
 
 **In general:**
-- ❌ **DO NOT** split settings up in multiple locations.  If necessary, you can link to tabs within a single settings window to keep things consolidated while still accessible from multiple locations.
-- ❌ **DO NOT** create a tab in the main Blish HUD window dedicated to just your settings.
+- ❌ **DO NOT** scatter settings across multiple locations.  If needed, link to tabs within a single settings window to keep everything consolidated while still accessible.
+- ❌ **DO NOT** create a tab in the main Blish HUD window dedicated solely to settings.
 
-Sometimes you may have features that deserve their own settings.  If your module exposes these settings in multiple different spots it can be confusing for users to remember where those settings are.
+Some features deserve their own settings, but placing them in multiple spots confuses users trying to remember where to adjust them.
 
 ## Should I have my own tab in the main Blish HUD window?
 
-The main Blish HUD window allows modules to register a tab within it to display a custom view.
+Modules can register a tab in the main Blish HUD window to display a custom view.
 
-As this window has a finite amount of space and users do not necessarily expect for new tabs to appear in this window:
-- ✅ **DO** create a tab if you don't need multiple views for the main UI component of your UI and it can effectively use the space provided to it.
-- ❌ **DO NOT** create a tab in the main Blish HUD window dedicated to just your settings.  Use a settings window which can be opened from the module page instead.
-- ❌ **DO NOT** create a tab that doesn't properly utilize the space.  The main Blish HUD window is large and the space should be utilized effectively.
+Because that window has limited space and users do not always expect new tabs to appear:
+- ✅ **DO** create a tab if your primary UI fits in a single view and uses the available space effectively.
+- ❌ **DO NOT** create a tab dedicated only to settings.  Use a settings window opened from the module page instead.
+- ❌ **DO NOT** create a tab that leaves most of the space unused.  The main window is large—make good use of it.
 
 :::warning
-Users are **regularly** confused by modules which add tabs to the main Blish HUD window.  It is not immediately obvious that a new tab was added without some kind of notification.
+Users are **regularly** confused by modules that add tabs to the main Blish HUD window because new tabs are not always obvious.
 :::
 
 ## Should I use a `CornerIcon`?
 
-The `CornerIcon` control is a little icon that shows in the top left of the players screen along with the Blish HUD icon and the in-game icons for the trading post, inventory, etc.
+The `CornerIcon` control shows in the top-left of the player's screen alongside the Blish HUD icon and in-game icons.
 
-You should use a CornerIcon if you need to expose features within a menu or on-click that your users would likely need to access ***every session***.  If it is unlikely that the contents of the menu would be used less than every session, please consider providing access to that UI in a different way to avoid too many icons at the top of the screen.
+Use a `CornerIcon` when you need to expose options or actions that users will likely access **every session**.  If the menu contents are needed less frequently, provide access another way to avoid overcrowding the top of the screen.
 
-Examples of scenarios which ***should not*** have a `CornerIcon`:
-- ❌ A menu with a shortcut to a settings window for a module that needs infrequent setting changes.
-- ❌ A button that toggles the module's main feature on and off if this would be an infrequent task.
-- ❌ A button that opens a tab within the main Blish HUD window (as it is already accessible through the Blish HUD icon).
+Examples of scenarios that **should not** have a `CornerIcon`:
+- ❌ A menu with a shortcut to a settings window for a module that rarely needs changes.
+- ❌ A button that toggles the module's main feature if the toggle is rarely used.
+- ❌ A button that opens a tab in the main Blish HUD window (the tab is already reachable from the Blish HUD icon).
 
-Examples of scenarios which ***would likely benefit*** from having a `CornerIcon`:
-- ✅ A menu with regularly accessed options or features that would otherwise be annoying to access through a dedicated window.
+Examples of scenarios that **benefit** from a `CornerIcon`:
+- ✅ A menu with regularly used options or features that would be cumbersome to reach through a dedicated window.
 
-If you already have a `CornerIcon` for an acceptable scenario, there is nothing wrong with expanding the menu to include shortcuts to your settings, etc.  In combination it is expected.
-
-If you do provide a CornerIcon, you may wish to provide a setting that allows users to toggle it on or off based on their own preference.
+If you already have a `CornerIcon` for a suitable scenario, it is fine to expand the menu with shortcuts to settings and similar entries.  Consider providing a setting to toggle the `CornerIcon` on or off based on user preference.
 
 ## Context Menu Strips
 
-Avoid adding right-click menus on your `CornerIcon` (or other controls).  We have found these to be very unintuitive and are working to remove them where we can.  Instead, use a left-click menu.
+Avoid adding right-click menus to your `CornerIcon` or other controls.  They are unintuitive; use a left-click menu instead.
