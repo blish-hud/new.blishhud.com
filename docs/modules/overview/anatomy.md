@@ -50,7 +50,14 @@ It is not required that you define all settings at launch.  Settings can be defi
 
 ```cpp
 protected override void DefineSettings(SettingCollection settings) {
-    _moduleSettings = new ModuleSettings(settings);
+    _settingOnlyShowAtHighSpeeds = settings.DefineSetting("OnlyShowAtHighSpeeds", false, () => "Only Show at High Speeds", () => "Only show the speedometer if you're going at least 1/4 the max speed.");
+    _settingShowSpeedNumber      = settings.DefineSetting("ShowSpeedNumber",      false, () => "Show Speed Value",         () => "Shows the speed (in approx. inches per second) above the speedometer.");
+
+    _appearanceSettings      = settings.AddSubCollection("Appearance", true);
+    _settingShowWithSparkles = _appearanceSettings.DefineSetting("ShowWithSparkles", true, () => "Show Sparkles", () => "If enabled, sparkles will be shown on the speedometer.");
+    _settingSparkleCount     = _appearanceSettings.DefineSetting("SparkleCount",     5,    () => "Sparkle Count", () => "The number of sparkles to show on the speedometer if 'Show Sparkles' is enabled.");
+
+    _settingSparkleCount.SetRange(1, 10);
 }
 ```
 
@@ -62,7 +69,7 @@ If you prefer a more tailored settings layout or want to surface settings in ano
 
 ```cpp
 public override IView GetSettingsView() {
-    return new SettingsHintView((_settingsWindow.Show, this.PackInitiator));
+    return new SettingsHintView();
 }
 ```
 

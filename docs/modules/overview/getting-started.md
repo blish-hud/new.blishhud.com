@@ -7,7 +7,19 @@ title: Getting Started
 
 ## Overview
 
-Blish HUD module projects can be created from scratch or by using the module template above. The template is the recommended approach. Both methods are described below—choose one path and follow it fully.
+Blish HUD module projects can be cloned from our example module, by using a Visual Studio project template, or from scratch. Cloning the example module template is the recommended approach. All three methods are described below—choose one path and follow it fully.
+
+## Setup Using the Example Module
+
+1. Download or clone the [Example Module repo](https://github.com/blish-hud/Example-Blish-HUD-Module).
+2. Open the project in Visual Studio and update the Project Name and the namespaces.
+3. Change the executablePath in \ExampleBlishhudModule\Properties\launchSettings.json to point to your copy of the `Blish HUD.exe`.
+
+:::info
+
+The example module comes with a number of examples so that you can see certain Blish HUD features in action.  Once you're ready to work on your module, you can remove the example code from the module.
+
+:::
 
 ## Setup Using the Module Template for Visual Studio
 
@@ -26,7 +38,7 @@ The template attempts to auto-fill your manifest, namespaces, and related detail
 
 :::
 
-## Setup Without the Module Template
+## Setup From Scratch
 
 1. Create a new .NET Framework Class Library project.
 2. Add a reference to the latest version of Blish HUD to your project (`Install-Package BlishHUD`).

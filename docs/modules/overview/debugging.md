@@ -8,13 +8,13 @@ title: Debugging Your Module
 1. In your module's **Debug** settings, set the **Start action** to *Start external program* and specify the path of **Blish HUD.exe**.
 2. Under the same settings, set **Command line arguments** to `--debug --module "c:\project-path\bin\x64\Debug\<path-to-your-module-output.bhm"`
 
-You should now be able to run your application. It will generate the *.bhm* file automatically when the project builds. The command-line arguments you specified launch Blish HUD and attach the debugger so you can debug your module. Guild Wars 2 should be running so Blish HUD has something to overlay while you debug. If you prefer not to run Guild Wars 2, adjust the **Command line arguments** to have Blish HUD overlay a PowerShell window for testing (https://blishhud.com/docs/user/launch-options#overlay-a-different-application-esp-for-testing).
+You should now be able to run your application. It will generate the *.bhm* file automatically when the project builds. The command-line arguments you specified launch Blish HUD and attach the debugger so you can debug your module. Guild Wars 2 should be running so Blish HUD has something to overlay while you debug. If you prefer not to run Guild Wars 2, adjust the **Command line arguments** to have Blish HUD [overlay a PowerShell window](https://blishhud.com/docs/user/launch-options#overlay-a-different-application-esp-for-testing) for testing.
 
 As long as your project generates a PDB file, it is packaged into your BHM and loaded by the module loader at runtime.
 
 ## Runtime Differences When Debugging
 
-Blish HUD behaves differently when you pass the debug flag. In addition to showing extra runtime data in the top right corner, some module error handling is disabled. This ensures exceptions are rethrown so you can address them during debugging.
+Blish HUD behaves differently when you pass the debug flag. In addition to showing extra runtime data in the top right corner, some module error handling is disabled. This ensures exceptions are rethrown so you can address them during development.
 
 ## Troubleshooting
 
