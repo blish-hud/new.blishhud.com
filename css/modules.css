@@ -1,4 +1,5 @@
 @import url('/static/css/hint.css');
+/*
 @font-face {
   font-family: 'Fira Sans';
   font-style: normal;
@@ -20,6 +21,7 @@
   font-display: swap;
   src: url(https://fonts.gstatic.com/s/firasans/v16/va9B4kDNxMZdWfMOD5VnLK3uQQ.ttf) format('truetype');
 }
+  */
 .module-content {
   /*! bulma.io v0.9.4 | MIT License | github.com/jgthms/bulma */
   /* Bulma Utilities */
@@ -33,7 +35,7 @@
   /* Bulma Layout */
   /*# sourceMappingURL=bulma.css.map */
   box-sizing: border-box;
-  font-family: 'Fira Sans', sans-serif;
+  /*font-family: 'Fira Sans', sans-serif;*/
   background-color: #1B1B1D;
   padding: 2em;
 }
@@ -522,7 +524,7 @@
   text-align: inherit;
 }
 .module-content table th {
-  color: #363636;
+  /*color: #363636;*/
 }
 @-webkit-keyframes spinAround {
   from {
@@ -2594,13 +2596,13 @@
   }
 }
 .module-content .table {
-  background-color: white;
-  color: #363636;
+  /*background-color: white;
+  color: #363636;*/
 }
 .module-content .table td,
 .module-content .table th {
-  border: 1px solid #dbdbdb;
-  border-width: 0 0 1px;
+  /*border: 1px solid #dbdbdb;
+  border-width: 0 0 1px;*/
   padding: 0.5em 0.75em;
   vertical-align: top;
 }
@@ -2709,7 +2711,8 @@
 .module-content .table thead td,
 .module-content .table thead th {
   border-width: 0 0 2px;
-  color: #363636;
+  /*color: #363636;*/
+  color: white;
 }
 .module-content .table tfoot {
   background-color: transparent;
@@ -4610,7 +4613,7 @@
 @media screen and (min-width: 769px), print {
   .module-content .level-left .level-item:not(:last-child),
   .module-content .level-right .level-item:not(:last-child) {
-    margin-right: 0.75rem;
+    margin-right: 1.75rem;
   }
 }
 .module-content .level-left {
@@ -6403,7 +6406,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: -1px;
-  padding: 0.5em 1em;
+  padding: 0.75em 1em;
   vertical-align: top;
 }
 .module-content .tabs a:hover {
@@ -6415,11 +6418,12 @@
 }
 .module-content .tabs li.is-active a {
   border-bottom-color: #485fc7;
-  color: #485fc7;
+  /* color: #485fc7; */
+  color: white;
 }
 .module-content .tabs ul {
   align-items: center;
-  border-bottom-color: #dbdbdb;
+  border-bottom-color: #232833;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   display: flex;
@@ -6455,14 +6459,17 @@
 .module-content .tabs.is-boxed a {
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
+  text-decoration: none;
 }
 .module-content .tabs.is-boxed a:hover {
-  background-color: whitesmoke;
-  border-bottom-color: #dbdbdb;
+  /*background-color: whitesmoke;
+  border-bottom-color: #dbdbdb;*/
+  color: white;
 }
 .module-content .tabs.is-boxed li.is-active a {
-  background-color: white;
-  border-color: #dbdbdb;
+  /*background-color: white;
+  border-color: #dbdbdb;*/
+  background-color: #303846;
   border-bottom-color: transparent !important;
 }
 .module-content .tabs.is-fullwidth li {
@@ -6477,7 +6484,7 @@
   position: relative;
 }
 .module-content .tabs.is-toggle a:hover {
-  background-color: whitesmoke;
+  /*background-color: whitesmoke;*/
   border-color: #b5b5b5;
   z-index: 2;
 }
@@ -10773,18 +10780,30 @@
 .module-content .card table td:last-child {
   text-align: right;
 }
+
+.module-content a:not(.button),
 .module-content p,
 .module-content strong {
+  color: inherit !important;
+}
+
+.module-content .tabs li a {
+  color: rgb(150, 150, 150) !important;
+}
+
+.module-content .tabs li a:hover,
+.module-content .tabs li.is-active a {
   color: white !important;
 }
+
 .module-content .is-expanded > .button {
   width: 100%;
   max-width: 256px;
 }
-.module-content a {
-  color: #0073c5;
+.module-content .external-source a {
+  text-decoration: underline;
 }
-.module-content a:hover {
+.module-content .external-source a:hover {
   color: #0073c5;
   text-decoration: underline;
 }
