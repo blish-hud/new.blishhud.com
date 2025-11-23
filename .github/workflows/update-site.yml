@@ -16,7 +16,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.7.0
+          node-version: 20.x
       - name: Install Docusaurus
         run: npm install --global docusaurus-init
       - run: npm install --global docusaurus
