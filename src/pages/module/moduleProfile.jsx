@@ -67,7 +67,7 @@ export default function ModuleProfile({ namespace, module }) {
 
     const changeTab = (tab) => {
         setActiveTab(tab);
-        window.location.hash = tab;
+        window.location.replace(`#${tab}`);
     };
 
     return (
