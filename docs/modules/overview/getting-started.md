@@ -7,22 +7,22 @@ title: Getting Started
 
 ## Overview
 
-Blish HUD module projects can be created from scratch or by using the above module template.  The template is the recommended method.  Both methods are described below.  Do not perform both sets of instructions.
+Blish HUD module projects can be created from scratch or by using the module template above. The template is the recommended approach. Both methods are described below—choose one path and follow it fully.
 
 ## Setup Using the Module Template for Visual Studio
 
-1. Install the latest Visual Studio module template for your version of Visual Studio:
+1. Install the latest Visual Studio module template for your Visual Studio version:
    - [Template for Visual Studio 2019](/downloads/ModuleTemplateDeployment2019.vsix)
    - [Template for Visual Studio 2022](/downloads/ModuleTemplateDeployment2022.vsix)
 2. Create a new project in Visual Studio using the template.
    - *Note: On the "Configure your new project" step of the project wizard, make sure to enter the desired project name.*
    - *Note: On the "Configure your new project" step of the project wizard, you **must** select "Place solution and project in the same directory".*
-3. When you open the Package Manager Console, you should get a prompt saying "Some NuGet packages are missing from this solution. Click to restore from your online package sources." Click the restore button to download the NuGet packages.
-4. Now run "Update-Package" in the Package Manager Console to update all NuGet packages to the latest versions.
+3. When you open the Package Manager Console, you should see a prompt that says, "Some NuGet packages are missing from this solution. Click to restore from your online package sources." Click the restore button to download the NuGet packages.
+4. Run `Update-Package` in the Package Manager Console to update all NuGet packages to the latest versions.
 
 :::info
 
-The template will attempt to auto-fill details in your manifest as well as define namespace, etc.  Be sure to review these to ensure things are how you would like them to be.
+The template attempts to auto-fill your manifest, namespaces, and related details. Review these fields to ensure they match your preferences.
 
 :::
 
@@ -30,7 +30,7 @@ The template will attempt to auto-fill details in your manifest as well as defin
 
 1. Create a new .NET Framework Class Library project.
 2. Add a reference to the latest version of Blish HUD to your project (`Install-Package BlishHUD`).
-3. Ensure the Blish HUD and all of Blish HUD's dependent references have **Copy Local** set to **False** in the properties of the reference.
-   - If you don't do this, your module will package these assemblies with your module.
-     - This will make your modules unnecessarily large (it'll contain the entire Blish HUD assembly!).
-     - Blish HUD will already have all of these assemblies loaded (since it naturally depends on them), so you don't need to include them.
+3. Set **Copy Local** to **False** for the Blish HUD reference and all of its dependencies in the reference properties.
+   - Otherwise, your build will package these assemblies with your module.
+     - This makes the module unnecessarily large because it would include the entire Blish HUD assembly.
+     - Blish HUD already has these assemblies loaded, so you do not need to ship them.
