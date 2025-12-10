@@ -89,6 +89,32 @@ function ModuleList({ modules, sortMethod, onSortChange, isAuthor = false }) {
 }
 
 function ModuleProfilePage({ namespace, module }) {
+    useEffect(() => {
+        const canonicalUrl = `https://blishhud.com/modules/?module=${namespace}`
+
+        if (!canonicalUrl) {
+            return;
+        }
+
+        const head = document.head;
+
+        const canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        canonicalLink.setAttribute('href', canonicalUrl);
+        head.appendChild(canonicalLink);
+
+        const ogUrl = document.createElement('meta');
+        ogUrl.setAttribute('property', 'og:url');
+        ogUrl.setAttribute('content', canonicalUrl);
+        head.appendChild(ogUrl);
+
+        const defaultAlt = document.createElement('link');
+        defaultAlt.setAttribute('rel', 'alternate');
+        defaultAlt.setAttribute('hrefLang', 'x-default');
+        defaultAlt.setAttribute('href', canonicalUrl);
+        head.appendChild(defaultAlt);
+    });
+
     return (
         <Layout
             title={`${module.Name} Module`}
@@ -96,11 +122,6 @@ function ModuleProfilePage({ namespace, module }) {
             <BrowserOnly>
                 {() =>
                     <Head>
-                        <link rel="canonical" href={`https://blishhud.com/modules/?module=${namespace}`} data-rh="true" />
-                        <link rel="alternate" href={`https://blishhud.com/modules/?module=${namespace}`} hreflang="en" data-rh="true" />
-                        <link rel="alternate" href={`https://blishhud.com/modules/?module=${namespace}`} hreflang="x-default" data-rh="true" />
-                        <meta property="og:url" content={`https://blishhud.com/modules/?module=${namespace}`} data-rh="true" />
-
                         <meta name="keywords" content={`${namespace}, ${module.Name}, Module, Guild Wars 2, gw2, Blish, HUD, bhud, TacO, Overlay`} />
                         <meta name="og:image" content={`https://pkgs.blishhud.com/metadata/img/module/${namespace}.png`} />
                     </Head>
