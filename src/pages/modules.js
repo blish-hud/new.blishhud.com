@@ -96,6 +96,11 @@ function ModuleProfilePage({ namespace, module }) {
             <BrowserOnly>
                 {() =>
                     <Head>
+                        <link rel="canonical" href={`https://blishhud.com/modules/?module=${namespace}`} data-rh="true" />
+                        <link rel="alternate" href={`https://blishhud.com/modules/?module=${namespace}`} hreflang="en" data-rh="true" />
+                        <link rel="alternate" href={`https://blishhud.com/modules/?module=${namespace}`} hreflang="x-default" data-rh="true" />
+                        <meta property="og:url" content={`https://blishhud.com/modules/?module=${namespace}`} data-rh="true" />
+
                         <meta name="keywords" content={`${namespace}, ${module.Name}, Module, Guild Wars 2, gw2, Blish, HUD, bhud, TacO, Overlay`} />
                         <meta name="og:image" content={`https://pkgs.blishhud.com/metadata/img/module/${namespace}.png`} />
                     </Head>
