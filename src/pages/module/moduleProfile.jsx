@@ -4,47 +4,6 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import HumanDate from '../components/humanDate';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-function AutoEmbedYouTube(profile) {
-    const ytEmbedPattern = /<a href="https:\/\/(www\.)?youtube\.com.*\/([^"]*)"[^<]+<\/a>/gm;
-
-    let m;
-
-    while ((m = ytEmbedPattern.exec(profile)) !== null) {
-        if (m.index === ytEmbedPattern.lastIndex) {
-            ytEmbedPattern.lastIndex++;
-        }
-
-        profile = profile.replace(m[0], `<iframe width='560' height='315' src='https://www.youtube.com/embed/${m[2]}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>`);
-    }
-
-    return profile;
-}
-
-function AssignTitleIds(profile) {
-    const titlePattern = /<h([0-9]) dir="auto">([^<]*)<\/h[0-9]>/gm;
-
-    let m;
-
-    while ((m = titlePattern.exec(profile)) !== null) {
-        if (m.index === titlePattern.lastIndex) {
-            titlePattern.lastIndex++;
-        }
-
-        profile = profile.replace(m[0], `<h${m[1]} id="${encodeURIComponent(m[2].replaceAll(' ', '-').toLowerCase())}" dir="auto">${m[2]}</h${m[1]}>`);
-    }
-
-    return profile;
-}
-
-function CleanModuleProfile(profile) {
-    profile = AutoEmbedYouTube(profile);
-    
-    // Currently pointless since the page is rendered too late for anchor links to work.
-    //profile = AssignTitleIds(profile);
-
-    return profile;
-}
-
 export default function ModuleProfile({ namespace, module }) {
     if (!ExecutionEnvironment.canUseDOM) {
         return <label>Wait...</label>
@@ -54,16 +13,44 @@ export default function ModuleProfile({ namespace, module }) {
         return <label>Loading...</label>
     }
 
-    module.ProfileSource = CleanModuleProfile(module.ProfileSource);
-
     const [activeTab, setActiveTab] = useState("profile");
 
     useEffect(() => {
         const hash = window.location.hash.replace("#", "");
+        if (!hash) {
+            return;
+        }
+
+        // Hash matches a tab: just switch tabs.
         if (hash === "profile" || hash === "releases") {
             setActiveTab(hash);
+            return;
         }
-    }, []);
+
+        // Hash is an in-page anchor (e.g. #settings) inside the profile.
+        // Make sure the profile tab is active so the content is rendered.
+        setActiveTab("profile");
+
+        const scrollToAnchor = () => {
+            const el = document.getElementById(hash);
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+                return true;
+            }
+            return false;
+        };
+
+        // Try immediately, and if not found, retry briefly while the DOM settles.
+        if (!scrollToAnchor()) {
+            const id = window.setInterval(() => {
+                if (scrollToAnchor()) {
+                    window.clearInterval(id);
+                }
+            }, 100);
+
+            return () => window.clearInterval(id);
+        }
+    }, [module.ProfileSource]);
 
     const changeTab = (tab) => {
         setActiveTab(tab);
