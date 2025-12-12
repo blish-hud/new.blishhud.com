@@ -136,6 +136,23 @@ function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
 
+  function getDayOfYear() {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    return Math.floor(diff / 86400000); // ms/day
+  }
+
+  function shuffleDeterministic(array, seed) {
+    const arr = array.slice();
+    for (let i = arr.length - 1; i > 0; i--) {
+      seed = (seed * 9301 + 49297) % 233280; // simple LCG
+      const j = Math.floor((seed / 233280) * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
   const [moduleShowcase, setModuleShowcase] = useState(defaultModuleShowcase);
 
   useEffect(() => {
@@ -151,9 +168,9 @@ function Home() {
           return;
         }
 
-        const randomized = data
-          .slice()
-          .sort(() => Math.random() - 0.5)
+        const seed = getDayOfYear(); // today's deterministic seed
+
+        const randomized = shuffleDeterministic(data, seed)
           .slice(0, 4)
           .map((item) => ({
             title: item.name,
@@ -219,37 +236,40 @@ function Home() {
           <iframe width="640" height="360" src="https://www.youtube.com/embed/iLYYumF2SCY" frameBorder="0" allow="fullscreen; autoplay; encrypted-media; picture-in-picture" allowFullScreen></iframe>
         </div>
       </header>
-      <main>
-        {moduleShowcase && moduleShowcase.length > 0 && (
+      {moduleShowcase && moduleShowcase.length > 0 && (
+        <main>
           <section className={styles.features}>
             <div className="container">
-              <div className="row">
-                {moduleShowcase.map((props, idx) => (
-                  <Module key={idx} {...props} />
-                ))}
-              </div>
+              <BrowserOnly>{() => (
+                <div className="row">
+                  {moduleShowcase.map((props, idx) => (
+                    <Module key={idx} {...props} />
+                  ))}
+                </div>
+              )}
+              </BrowserOnly>
             </div>
           </section>
-        )}
-        <div className={styles.buttons}>
-          <Link
-            className={clsx(
-              'button button--outline button--secondary button--lg link--download',
-              styles.getStarted,
-            )}
-            to='/modules/'>
-            and 80+ more modules...
-          </Link>
-        </div>
-        <div className="container" style={{ display: "none" }}>
-          <div className="module-content">
-            <div className="module-cards" style={{ display: "default", gridTemplateColumns: "default" }}>
-              <AliceCarousel items={items} responsive={{ 0: { items: 2 } }} />
+          <div className={styles.buttons}>
+            <Link
+              className={clsx(
+                'button button--outline button--secondary button--lg link--download',
+                styles.getStarted,
+              )}
+              to='/modules/'>
+              and 80+ more modules...
+            </Link>
+          </div>
+          <div className="container" style={{ display: "none" }}>
+            <div className="module-content">
+              <div className="module-cards" style={{ display: "default", gridTemplateColumns: "default" }}>
+                <AliceCarousel items={items} responsive={{ 0: { items: 2 } }} />
+              </div>
             </div>
           </div>
-        </div>
-        <img src="/img/events-hero-half.png" className="ui-hero" />
-      </main>
+          <img src="/img/events-hero-half.png" className="ui-hero" />
+        </main>
+      )}
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <p className="hero__subtitle">For Developers</p>
