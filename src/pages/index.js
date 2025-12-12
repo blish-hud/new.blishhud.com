@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -10,9 +10,10 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import './index.css';
 import ModuleCard from './module/moduleCard';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-const moduleShowcase = [
-  {
+const defaultModuleShowcase = [
+  /*{
     title: <>Pathing</>,
     imageUrl: 'https://assets.gw2dat.com/1228248.png',
     description: (
@@ -41,7 +42,7 @@ const moduleShowcase = [
       </>
     ),
     module: "Ideka.RacingMeter"
-  }
+  }*/
 ];
 
 const features = [
@@ -104,10 +105,10 @@ const features = [
 function Module({ imageUrl, title, description, module }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <a href={`/modules/?module=${module}`} className={clsx('col col--4 module-card', styles.feature)}>
+    <a href={`/modules/?module=${module}`} className={clsx('col col--3 module-card', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
+          <img className={styles.featureImage} src={imgUrl} alt={title} style={{ borderRadius:"8px", marginBottom:"1rem" }} />
         </div>
       )}
       <h3 className="text--center">{title}</h3>
@@ -134,6 +135,42 @@ function Feature({ imageUrl, title, description }) {
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
+
+  const [moduleShowcase, setModuleShowcase] = useState(defaultModuleShowcase);
+
+  useEffect(() => {
+    async function fetchRotation() {
+      try {
+        const response = await fetch('https://pkgs.blishhud.com/metadata/rotation.json');
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (!Array.isArray(data) || data.length === 0) {
+          return;
+        }
+
+        const randomized = data
+          .slice()
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 4)
+          .map((item) => ({
+            title: item.name,
+            imageUrl: `https://pkgs.blishhud.com/metadata/img/module/${item.module}.png`,
+            description: item.description,
+            module: item.module,
+          }));
+
+        setModuleShowcase(randomized);
+      } catch (error) {
+        // On error, keep using defaultModuleShowcase
+        console.error('Failed to load module rotation:', error);
+      }
+    }
+
+    fetchRotation();
+  }, []);
 
   const items = [
 
@@ -179,7 +216,7 @@ function Home() {
             </Link>
           </div>
           <br />
-          <iframe width="640" height="360" src="https://www.youtube.com/embed/iLYYumF2SCY" frameBorder="0" allow="fullscreen; autoplay; encrypted-media; picture-in-picture" allowFullscreen></iframe>
+          <iframe width="640" height="360" src="https://www.youtube.com/embed/iLYYumF2SCY" frameBorder="0" allow="fullscreen; autoplay; encrypted-media; picture-in-picture" allowFullScreen></iframe>
         </div>
       </header>
       <main>
