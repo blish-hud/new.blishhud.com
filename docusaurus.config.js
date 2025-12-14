@@ -108,6 +108,7 @@ const config = {
                   Guild Wars 2: Path of Fire, ArenaNet, NCSOFT, the Interlocking NC Logo, and all associated
                   logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other
                   trademarks are the property of their respective owners.</p>
+                  <p><a style="color:white;" href="/legal">Legal</a> | <a style="color:white;" href="/privacy-policy">Privacy Policy</a></p>
                   </div>`,
       },
       announcementBar: {
