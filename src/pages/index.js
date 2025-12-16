@@ -12,38 +12,7 @@ import './index.css';
 import ModuleCard from './module/moduleCard';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-const defaultModuleShowcase = [
-  /*{
-    title: <>Pathing</>,
-    imageUrl: 'https://assets.gw2dat.com/1228248.png',
-    description: (
-      <>
-        Robust TacO marker pack support to guide you through map completion, difficult story content, tedious achievements, and more.
-      </>
-    ),
-    module: "bh.community.pathing"
-  },
-  {
-    title: <>Achievement Tracker</>,
-    imageUrl: 'https://assets.gw2dat.com/965720.png',
-    description: (
-      <>
-        Track any achievement with multiple windows and information from the official wiki.
-      </>
-    ),
-    module: "Denrage.AchievementTrackerModule"
-  },
-  {
-    title: <>Racing Meter</>,
-    imageUrl: 'https://assets.gw2dat.com/993691.png',
-    description: (
-      <>
-        Specialized mount speedometers. Leaderboards for official and unofficial races. Race your ghost or ghosts from the leaderboards.
-      </>
-    ),
-    module: "Ideka.RacingMeter"
-  }*/
-];
+const defaultModuleShowcase = [];
 
 const features = [
   {
@@ -196,7 +165,7 @@ function Home() {
 
   return (
     <Layout
-      title={`${siteConfig.title}`}
+      title={``}
       description={`${siteConfig.tagline}`}>
       <Head>
         <meta name="keywords" content="Guild Wars 2, gw2, Blish, HUD, bhud, TacO, Overlay, addons, mods, plugins" />
