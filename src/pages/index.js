@@ -208,7 +208,7 @@ function Home() {
       {moduleShowcase && moduleShowcase.length > 0 && (
         <main>
           <section className={styles.features}>
-            <div className="container">
+            <div className="container" data-nosnippet>
               <BrowserOnly>{() => (
                 <div className="row">
                   {moduleShowcase.map((props, idx) => (
