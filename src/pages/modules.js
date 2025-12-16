@@ -103,6 +103,9 @@ function ModuleProfilePage({ namespace, module }) {
 
                         <meta name="keywords" content={`${namespace}, ${module.Name}, Module, Guild Wars 2, gw2, Blish, HUD, bhud, TacO, Overlay`} />
                         <meta name="og:image" content={`https://pkgs.blishhud.com/metadata/img/module/${namespace}.png`} />
+
+                        <meta name="robots" content="max-video-preview:0"></meta>
+                        <meta name="thumbnail" content={`https://pkgs.blishhud.com/metadata/img/module/${namespace}.png`}></meta>
                     </Head>
                 }
             </BrowserOnly>
