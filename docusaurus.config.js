@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Blish HUD',
-  tagline: 'Blish HUD is a powerful overlay framework designed for Guild Wars 2. Easily install and manage numerous modules/addons to bring quality-of-life features and improvements to your gameplay.',
+  tagline: 'Blish HUD is a powerful overlay framework designed for Guild Wars 2. Manage numerous modules/addons to bring quality-of-life features and improvements to your gameplay.',
   url: 'https://blishhud.com',
   baseUrl: '/',
   onBrokenLinks: 'warn',
