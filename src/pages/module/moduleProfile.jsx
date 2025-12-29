@@ -142,7 +142,7 @@ export default function ModuleProfile({ namespace, module }) {
                 </div>
             )}
             <div class="columns" style={{ marginTop: "1rem" }}>
-                <section class="column is-two-thirds">
+                <section className={`column ${module.MuklukVideo != null || module.AuthorProfile.GuildWars2Profile != null || module.AuthorProfile.GithubProfile != null || module.AuthorProfile.KofiProfile != null ? "is-two-thirds" : "is-full"}`}>
                     <div className="tabs is-boxed" style={{ marginBottom: 0 }}>
                         <ul>
                             <li className={activeTab === "profile" ? "is-active" : ""} onClick={() => changeTab("profile")} >
