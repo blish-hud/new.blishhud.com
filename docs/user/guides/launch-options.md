@@ -1,4 +1,5 @@
 ---
+description: complete reference guide for Blish HUD launch options. Learn how to use command line parameters to auto-launch Guild Wars 2, customize settings paths, enable debug modes, etc.
 id: launch-options
 title: Launch Options
 ---

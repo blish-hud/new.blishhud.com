@@ -1,4 +1,5 @@
 ---
+description: Reference guide for configuring Blish HUD. Includes details on Overlay, Dynamic HUD, Graphics, and Debug settings.
 id: overlay-settings
 title: Overlay Settings
 ---
@@ -37,7 +38,6 @@ We do not typically recommend changing any of the graphics settings from their d
 | Setting | Default | Description |
 | - | - | - |
 | **Frame Limiter** | *Locked to 60 FPS* | Indicates the framerate lock for Blish HUD.  Increasing this limit will increase CPU and GPU utilization.  Do not set it to *Unlimited* without **Enable Vsync**.  Increasing Blish HUD's framerate is rarely helpful unless your game has higher FPS than Blish HUD. |
-| **Enable Vsync** | *Yes* | Indicates if vsync should be enabled for Blish HUD.  This should generally be left enabled - especially if you intend to set the **Frame Limiter** to *Unlimited* for some reason. |
 | **Smooth Character Position** | *Yes* | Guild Wars 2 does not report accurate character position data every frame for some reason.  Enabling this feature will attempt to smooth out the character position so that modules get less jerky position data. |
 | **DPI Scaling** | *Automatic - Sync With Game* | Indicates if Blish HUD should match the DPI scaling setting set in-game.  This should typically be left automatic. |
 | **Interface Size** | *Automatic - Sync With Game* | Indicates if Blish HUD should match the in-game interface size setting or scale independently.  Changing this from automatic will mis-align Blish HUD elements from the game. |

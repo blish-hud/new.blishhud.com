@@ -1,4 +1,5 @@
 ---
+description: Using ArcDPS? Learn how to install our integration bridge to feed combat and party data directly into supported Blish HUD modules.
 id: arcdps-integration
 title: ArcDPS Integration
 ---

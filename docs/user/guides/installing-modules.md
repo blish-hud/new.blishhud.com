@@ -1,4 +1,5 @@
 ---
+description: Learn how to install and update Blish HUD modules. Use the built-in Repository for automatic management, or follow our guide to manually install .bhm files into your Modules directory.
 id: installing-modules
 title: Installing Modules
 ---

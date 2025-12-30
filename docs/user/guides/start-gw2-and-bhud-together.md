@@ -1,4 +1,6 @@
 ---
+description: Discover how to configure Blish HUD to launch alongside Guild Wars 2 automatically using the tray icon, a special Blish HUD shortcut, or the Windows Startup folder.
+id: start-gw2-and-bhud-together
 title: Start GW2 and Blish HUD Together
 ---
 
@@ -25,3 +27,15 @@ Here is the exact bit added at the end:
 The 2 tells it to auto-login. If you prefer it not autologin, you can use:
 
 `--startgw2 1`
+
+### Starting Blish HUD at Launch
+
+You may find it helpful to launch Blish HUD when your system starts automatically.  When paired with the **Enable stay in tray** setting, it allows you to use Blish HUD without necessitating ever needing to launch it manually.  To do this:
+1. Open the Blish HUD folder which contains the Blish HUD executable.
+1. Press the **Windows logo key + R**, type `shell:startup`, then select **OK**. This opens the **Startup** folder in another window.
+2. Right-click **Blish HUD.exe** (it will show Blish as an icon) and drag your mouse to the **Startup** folder.
+3. Release right-click and select **Create shortcuts here**.
+
+[Reference: Microsoft Guide](https://support.microsoft.com/en-us/windows/add-an-app-to-run-automatically-at-startup-in-windows-10-150da165-dcd9-7230-517b-cf3c295d89dd)
+
+The next time you log in to your computer, Blish HUD will automatically launch and sit quietly in your notification area.
