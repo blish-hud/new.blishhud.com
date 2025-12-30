@@ -1,8 +1,8 @@
 ---
 description: Is Blish HUD safe to use? We strive to ensure our framework and repository modules comply with ArenaNet's policies. Read our safety breakdown and find Guild Wars 2's official policy links here.
 id: is-bhud-safe
-title: Is it safe to use Blish HUD?
 sidebar_position: 1
+title: Is it safe to use Blish HUD?
 ---
 
 :::info tl;dr
