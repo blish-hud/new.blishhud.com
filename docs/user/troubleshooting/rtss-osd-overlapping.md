@@ -4,8 +4,8 @@ id: rtss-osd-overlapping
 title: RTSS shows overlapping OSD
 ---
 
-# Issue
+## Issue
 RivaTuner Statistics Server (RTSS) shows the on-screen-display (OSD), e.g. FPS, twice and overlapped. That happens because RTSS injects itself not only into Guild Wars 2 but as well into Blish HUD.
 
-# Solution
+## Solution
 In RTSS in the global profile set 'Application Detection Level' to 'None' . Add Guild Wars 2 exe as a new Profile and set 'Application Detection Level' to 'Low' for that profile.

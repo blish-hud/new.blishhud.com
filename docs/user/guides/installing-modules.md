@@ -4,7 +4,7 @@ id: installing-modules
 title: Installing Modules
 ---
 
-### Installing modules from the Repo
+## Installing modules from the Repo
 
 Most modules can be automatically downloaded while running Blish HUD using the module package manager under settings.
 
@@ -12,7 +12,7 @@ Most modules can be automatically downloaded while running Blish HUD using the m
 
 From this page you can update existing modules or install new ones from the public repository as they are released.  This is the recommended way to manage modules.
 
-### Manually Installing Modules
+## Manually Installing Modules
 
 Modules are special archives with a `.bhm` _(Blish HUD Module)_ file extension.  You can manually install these modules by placing them into your Modules directory.
 
