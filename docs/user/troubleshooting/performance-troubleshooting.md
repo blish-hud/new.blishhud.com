@@ -1,5 +1,5 @@
 ---
-description: Troubleshoot FPS drops or lag when running Blish HUD. Learn how to optimize your Frame Limiter settings, enable VSync, and ensure Windows is using your dedicated GPU.
+description: Troubleshoot FPS drops or lag when running Blish HUD. Learn how to optimize your Frame Limiter settings, and ensure Windows is using your dedicated GPU.
 id: performance-troubleshooting
 title: Performance Troubleshooting
 ---
@@ -20,16 +20,9 @@ If your performance issue only occurs while certain modules are enabled, please 
 
 ## Evaluate Blish HUD Graphics Settings
 
-By default, Blish HUD is configured to run locked at 60 FPS with VSync enabled.  Many users will change these settings without recognizing the consequences.  Setting Blish HUD to a Frame Limiter of Unlimited tells Blish HUD that it has no restrictions and should attempt to render as many frames as possible.  This is not necessary for an overlay.  
+By default, Blish HUD is configured to **match your monitor refresh rate**.  If you have a high refresh rate monitor, you can try setting Blish HUD's frame limiter to either 90 or 60 FPS.  If you don't rely on modules that render 3D elements (such as Pathing or Racing Meter), you can even try setting it to 30 FPS.
 
-If you use modules such as Pathing, Racing Meter, or others that render 3D elements, you should ensure Blish HUD runs slightly faster than the game.  Typically 60 FPS is fine for most users or 90 FPS for those with higher-performance systems.  For lower-end systems or for those not using modules that render 3D elements, locking Blish HUD to 30 FPS is perfectly fine.
-
-There are very few reasons to disable VSync in Blish HUD.  VSync stigmas, such as input lag, etc., are irrelevant to an overlay such as Blish HUD.
-
-👉 If you are unsure about these settings, set the Frame Limiter to **Locked to 60 Fps** and check **Enable VSync**.
-
-![image](https://user-images.githubusercontent.com/1950594/223299912-e7b45985-bedb-4ab6-bfa0-ec337b60a8d9.png)
-
+<img width="744" height="186" alt="CleanShot 2025-12-30 at 18 17 02@2x" src="https://github.com/user-attachments/assets/99ac5c74-2423-4c7b-b474-54ebb3336c54" />
 
 ## Ensure Blish HUD and Guild Wars 2 are using your dedicated GPU
 
