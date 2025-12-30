@@ -35,7 +35,7 @@ There are very few reasons to disable VSync in Blish HUD.  VSync stigmas, such a
 
 Those with an integrated GPU (iGPU) and a dedicated GPU may find that their performance issues are caused by either Blish HUD, Guild Wars 2, or both running on the wrong GPU.  In your computer settings under **System > Display > Graphics** ensure that both Guild Wars 2 and Blish HUD are configured to use your high-performance GPU.
 
-https://user-images.githubusercontent.com/1950594/223299168-60de137a-d01d-47f5-94e7-d7de95d194d2.mp4
+<video src='https://user-images.githubusercontent.com/1950594/223299168-60de137a-d01d-47f5-94e7-d7de95d194d2.mp4' controls='controls' muted='muted'></video>
 
 You will know you've done this successfully if both applications are shown as using the same GPU engine in Task Manager:
 

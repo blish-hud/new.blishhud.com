@@ -1,12 +1,12 @@
 ---
 description: New to Blish HUD? Watch our setup video or follow this quick guide to download, extract, and launch Blish HUD, a Guild Wars 2 overlay, for the first time.
-id: getting-started
-title: Getting Started
+id: first-time-setup
 sidebar_position: 1
+title: Getting Started
 ---
 
 ## Video Guide
-A video guide which walks you through setting up Blish HUD for the first time: https://www.youtube.com/watch?v=iLYYumF2SCY
+A video guide which walks you through setting up Blish HUD for the first time: <iframe width='640' height='360' src='https://www.youtube.com/embed/iLYYumF2SCY' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
 
 ## Download & Install Blish HUD
 
