@@ -4,11 +4,11 @@ id: bhud-window-empty
 title: Main Blish HUD window is empty
 ---
 
-# Example
+## Example
 
 ![image](https://user-images.githubusercontent.com/1950594/229578700-af253869-82d3-4282-b046-6e4ad5f36475.png)
 
-# Solution
+## Solution
 
 This is typically caused by Blish HUD missing some resource files (those stored within the Content folder).
 

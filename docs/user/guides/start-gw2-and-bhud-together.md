@@ -28,7 +28,7 @@ The 2 tells it to auto-login. If you prefer it not autologin, you can use:
 
 `--startgw2 1`
 
-### Starting Blish HUD at Launch
+## Starting Blish HUD at Launch
 
 You may find it helpful to launch Blish HUD when your system starts automatically.  When paired with the **Enable stay in tray** setting, it allows you to use Blish HUD without necessitating ever needing to launch it manually.  To do this:
 1. Open the Blish HUD folder which contains the Blish HUD executable.
