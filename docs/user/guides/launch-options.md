@@ -8,7 +8,7 @@ Launch options allow you to set lower level settings in the overlay at launch.  
 
 ## Parameters
 
-### -g, --startgw2 <1 or 2\>
+### -g, --startgw2 &lt;1 or 2&gt;
 
 _Default: `0`_
 
@@ -18,48 +18,48 @@ Allows you to launch Guild Wars 2 along with Blish HUD.
 - 1 will start Guild Wars 2
 - 2 will start Guild Wars 2 with the autologin flag
 
-### -p, --process <Gw2-64\>
+### -p, --process &lt;Gw2-64&gt;
 
 _Default: `Gw2-64`_
 
 The name of the process the overlay will be waiting for (without `.exe`). This parameter is used in conjunction with -w, --window.
 
-### -P, --pid <pid\>
+### -P, --pid &lt;pid&gt;
 
 The PID of the process the overlay will be waiting for to overlay.  Has a higher priority than -p, --process but a lower priority than -m, --mumble.
 
-### -w, --window <ArenaNet_Dx_Window_Class\>
+### -w, --window &lt;ArenaNet_Dx_Window_Class&gt;
 
 _Default: `ArenaNet_Dx_Window_Class`_
 
 The name of the window Blish HUD should overlay. This parameter is used in conjunction with -p, --process.
 
-### -s, --settings <path\to\settings\dir\>
+### -s, --settings &lt;path\to\settings\dir&gt;
 
 _Default: `%userprofile%\Documents\Guild Wars 2\addons\blishhud`_
 
 The directory where Blish HUD should load and save settings and other persistent data from/to.
 
-### -a, --progdata <path\to\programdata>
+### -a, --progdata &lt;path\to\programdata&gt;
 _Introduced in Blish HUD v1.1.2_
 
 _Default: `%programdata%\Blish HUD\`_
 
 The path where Blish HUD will save non-user data such as cached textures.
 
-### -r, --ref <path\to\ref.dat\>
+### -r, --ref &lt;path\to\ref.dat&gt;
 
 _Default: `.\ref.dat`_
 
 The path to the ref.dat file which primarily contains texture and audio assets for Blish HUD. 
 
-### -m, --mumble <MumbleLink\>
+### -m, --mumble &lt;MumbleLink&gt;
 
 _Default: `MumbleLink`_
 
 The name of the Mumble Link target that Blish HUD should be reading from (if you are using the `-mumble` parameter with Guild Wars 2).
 
-### -f, --maxfps <60\>
+### -f, --maxfps &lt;60&gt;
 
 _Default: `60`_
 
@@ -74,7 +74,7 @@ When enabled:
 * Module exceptions are rethrown (where they would otherwise be handled) to enable debugging Modules easier.
 * Sets the minimum output log level to DEBUG.
 
-### -M, --module <path\to\module.bhm\>
+### -M, --module &lt;path\to\module.bhm&gt;
 
 Expects the path to a Blish HUD module file (.bhm) OR the path to a directory which contains an unpacked module.  When specified, Blish HUD will load this module and attempt to enable it when launched.  Useful when developing modules.
 

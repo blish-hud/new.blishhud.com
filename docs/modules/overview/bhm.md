@@ -11,7 +11,7 @@ Modules are packaged in `.bhm` (Blish HUD Module) files.  They are simply ZIP fi
 
 Modules by default contain the following:
 - **manifest.json** — a JSON manifest which describes the module and provides metadata necessary for Blish HUD to load the module.
-- **<module-name\>.dll** — the compiled module's assembly.
+- **&lt;module-name&gt;.dll** — the compiled module's assembly.
 - **ref\\** — a directory which holds all textures and other assets that the module will need to load at runtime.
 
 :::note
@@ -26,4 +26,4 @@ Dependent assemblies must be included in the root directory of the package.  Bli
 
 ### PDBs
 
-It is recommended that you include PDB files in your published modules to help when users get errors while using your module.  When a module's DLL is loaded, Blish HUD checks for a PDB of the same name in the root of the module (e.g. **<module-name\>.pdb**).  If a matching file is found, it is loaded in with your module.
+It is recommended that you include PDB files in your published modules to help when users get errors while using your module.  When a module's DLL is loaded, Blish HUD checks for a PDB of the same name in the root of the module (e.g. **&lt;module-name&gt;.pdb**).  If a matching file is found, it is loaded in with your module.
