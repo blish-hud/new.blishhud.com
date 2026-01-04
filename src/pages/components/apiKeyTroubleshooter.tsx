@@ -138,14 +138,12 @@ function classify(results: Results) {
 
   // Tokeninfo ok, but account fails => missing permissions OR weird account state
   if (t.state === "success" && a.state === "error") {
-    if (as === 401 || as === 403) {
+    if (as === 401 || as === 403 || as === 500) {
       return {
         level: "warn" as const,
         title: "Key is valid, but can’t access /account",
         bullets: [
-          "Key looks real (tokeninfo succeeded), but /account is forbidden.",
-          "Most common cause: missing required permissions/scopes on the key.",
-          "Fix: re-create the key with the permissions your app requires.",
+          "Key looks real (tokeninfo succeeded), but /account didn't load correctly."
         ],
       };
     }
@@ -155,7 +153,7 @@ function classify(results: Results) {
       bullets: [
         "Token is accepted, but /account request failed for another reason.",
         "Check the error details shown below.",
-        "Retry; if it persists, it may be a transient API issue.",
+        "Retry; if it persists, it may be a transient API issue that you'll need to wait until it resolves.",
       ],
     };
   }
@@ -170,6 +168,7 @@ function classify(results: Results) {
           "Your key can read /account but not /characters.",
           "Most common cause: missing 'characters' permission on the key.",
           "Fix: re-create the key and enable the characters permission.",
+          "Retry; if it persists, it may be a transient API issue that you'll need to wait until it resolves.",
         ],
       };
     }
@@ -179,7 +178,7 @@ function classify(results: Results) {
       bullets: [
         "Key is valid and can read /account, but /characters request failed.",
         "Check the error details shown below.",
-        "If you have a lot of characters, this should still work—errors usually mean permissions or API instability.",
+        "Retry; if it persists, it may be a transient API issue that you'll need to wait until it resolves.",
       ],
     };
   }
