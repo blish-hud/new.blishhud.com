@@ -13,10 +13,10 @@ There are various things that may prevent Blish HUD from updating itself.  Some 
 
 ## Solution
 
-The easiest way to complete your Blish HUD upgrade it to manually extract it again.
+The easiest way to complete your Blish HUD upgrade is to manually extract it again.
 
 1. Open the folder where you have Blish HUD extracted and delete the `unpack.zip` file, if it exists.
-2. Download the [latest release](https://github.com/blish-hud/Blish-HUD/releases/latest/download/Blish.HUD.zip).
+2. Download the [latest release](https://github.com/blish-hud/Blish-HUD/releases/latest/download/Blish.HUD.zip) of Blish HUD.
 3. Right-click the downloaded ZIP and select **Properties**.
 4. Select the **Unblock** checkbox and then press **OK**.
 5. Extract the fresh copy of Blish HUD - replace the existing files with the new ones.
