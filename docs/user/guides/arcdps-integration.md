@@ -24,6 +24,6 @@ Our integration can be automatically added to your ArcDPS install using [GW2-UOA
 
 ## Manually
 
-If you have [ArcDPS](https://www.deltaconnected.com/arcdps/) installed manually and wish to install our plugin manually, you can do so by downloading the latest version of the [ArcDPS Blish HUD plugin](https://github.com/blish-hud/arcdps-bhud/releases/latest/download/arcdps-bhud-v0.3.1-x86_64-pc-windows-msvc.zip).  Extract the `arcdps_bhud.dll` DLL from the ZIP and place it in the same folder as your ArcDPS dll.
+If you have [ArcDPS](https://www.deltaconnected.com/arcdps/) installed manually and wish to install our plugin manually, you can do so by downloading the latest version of the [ArcDPS Blish HUD plugin](https://github.com/blish-hud/arcdps-bhud/releases/latest/download/arcdps_bhud.dll).  Place the downloaded `arcdps_bhud.dll` DLL in the `bin64` folder.
 
 Once done, restart both Guild Wars 2 and Blish HUD to have the integrations now be available to modules that utilize them.
