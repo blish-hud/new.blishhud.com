@@ -69,3 +69,7 @@ details a {
   font-weight: bold;
   text-decoration: underline !important;
 }
+
+ol, ul {
+  padding-left:2.5rem !important;
+}
