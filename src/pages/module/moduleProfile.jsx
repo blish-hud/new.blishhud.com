@@ -15,6 +15,10 @@ export default function ModuleProfile({ namespace, module }) {
 
     const [activeTab, setActiveTab] = useState("profile");
 
+    const [modalImageUrl, setModalImageUrl] = useState(null);
+    const profileContainerRef = React.useRef(null);
+
+    // Tab and anchor handling.
     useEffect(() => {
         const hash = window.location.hash.replace("#", "");
         if (!hash) {
@@ -51,6 +55,59 @@ export default function ModuleProfile({ namespace, module }) {
             return () => window.clearInterval(id);
         }
     }, [module.ProfileSource]);
+
+    // Image modal handling.
+    useEffect(() => {
+        // Only attach while the profile tab is actually rendered
+        if (activeTab !== "profile") return;
+
+        const el = profileContainerRef.current;
+        if (!el) return;
+
+        const onClick = (e) => {
+            const a = e.target.closest?.("a");
+            if (!a) return;
+
+            const img = a.querySelector("img");
+            if (!img) return;
+
+            const hrefAttr = a.getAttribute("href");
+            const srcAttr = img.getAttribute("src");
+            if (!hrefAttr || !srcAttr) return;
+
+            const href = new URL(hrefAttr, window.location.href).href;
+            const src = new URL(srcAttr, window.location.href).href;
+
+            if (href === src) {
+            e.preventDefault();
+            e.stopPropagation();
+            setModalImageUrl(src);
+            }
+        };
+
+        el.addEventListener("click", onClick, true);
+        return () => el.removeEventListener("click", onClick, true);
+    }, [activeTab, module.ProfileSource]);
+
+    // Image modal esc/scroll lock handling.
+    useEffect(() => {
+        if (!modalImageUrl) return;
+
+        const onKeyDown = (e) => {
+            if (e.key === "Escape") setModalImageUrl(null);
+        };
+
+        document.addEventListener("keydown", onKeyDown);
+
+        // scroll lock
+        const originalOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+            document.body.style.overflow = originalOverflow;
+        };
+    }, [modalImageUrl]);
 
     const changeTab = (tab) => {
         setActiveTab(tab);
@@ -157,7 +214,7 @@ export default function ModuleProfile({ namespace, module }) {
                     </div>
 
                     { activeTab == "profile" && (
-                        <div class="box external-source" dangerouslySetInnerHTML={{ __html: module.ProfileSource ? module.ProfileSource : "<center><i>No Description</i></center>" }} style={{ borderRadius: "0 0 6px 6px" }}></div>
+                        <div class="box external-source" ref={profileContainerRef} dangerouslySetInnerHTML={{ __html: module.ProfileSource ? module.ProfileSource : "<center><i>No Description</i></center>" }} style={{ borderRadius: "0 0 6px 6px" }}></div>
                     )}
 
                     { activeTab == "releases" && (
@@ -288,6 +345,35 @@ export default function ModuleProfile({ namespace, module }) {
                     )}
                 </section>
             </div>
+            {modalImageUrl && (
+                <div
+                    onClick={(e) => {
+                    // close only when clicking the backdrop (outside the image)
+                    if (e.target === e.currentTarget) setModalImageUrl(null);
+                    }}
+                    style={{
+                    position: "fixed",
+                    inset: 0,
+                    background: "rgba(0,0,0,0.85)",
+                    zIndex: 9999,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "24px",
+                    }}
+                >
+                    <img
+                    src={modalImageUrl}
+                    alt=""
+                    style={{
+                        maxWidth: "95vw",
+                        maxHeight: "95vh",
+                        objectFit: "contain",
+                        borderRadius: "8px",
+                    }}
+                    />
+                </div>
+            )}
         </div>
     );
 }
