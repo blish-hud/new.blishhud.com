@@ -8,26 +8,47 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import Loading from '@theme/Loading';
 
-function ModuleList({ modules, sortMethod, onSortChange, isAuthor = false }) {
+function sortModules(modules, sortMethod) {
+    const sortableModules = [...modules];
+
+    switch (sortMethod) {
+        case "Downloads":
+            return sortableModules.sort((a, b) => b.Downloads - a.Downloads);
+        case "A to Z":
+            return sortableModules.sort((a, b) => a.Name.localeCompare(b.Name));
+        case "Z to A":
+            return sortableModules.sort((a, b) => b.Name.localeCompare(a.Name));
+        case "Last Update":
+            return sortableModules.sort((a, b) => new Date(b.LastUpdate) - new Date(a.LastUpdate));
+        default:
+            return sortableModules;
+    }
+}
+
+function ModuleList({ modules, sortMethod, onSortChange, searchQuery, setSearchQuery, isAuthor = false }) {
     const context = useDocusaurusContext();
     const { siteConfig = {} } = context;
 
-    const sortedModules = useMemo(() => {
-        const sortableModules = [...modules];
+    const darkInputStyle = {
+        backgroundColor: '#242526',
+        color: '#e3e3e3',
+        borderColor: '#444'
+    };
 
-        switch (sortMethod) {
-            case "Downloads":
-                return sortableModules.sort((a, b) => b.Downloads - a.Downloads);
-            case "A to Z":
-                return sortableModules.sort((a, b) => a.Name.localeCompare(b.Name));
-            case "Z to A":
-                return sortableModules.sort((a, b) => b.Name.localeCompare(a.Name));
-            case "Last Update":
-                return sortableModules.sort((a, b) => new Date(b.LastUpdate) - new Date(a.LastUpdate));
-            default:
-                return sortableModules;
-        }
-    }, [modules, sortMethod]);
+    const filteredModules = useMemo(() => {
+        const query = searchQuery.trim().toLowerCase();
+        if (!query) return modules;
+
+        return modules.filter((m) =>
+            (m.Name && m.Name.toLowerCase().includes(query)) ||
+            (m.Summary && m.Summary.toLowerCase().includes(query)) ||
+            (m.AuthorName && m.AuthorName.toLowerCase().includes(query))
+        );
+    }, [modules, searchQuery]);
+
+    const sortedModules = useMemo(() => {
+        return sortModules(filteredModules, sortMethod);
+    }, [filteredModules, sortMethod]);
 
     let pageTitle = "Modules";
     let pageDescription = siteConfig.tagline;
@@ -60,21 +81,46 @@ function ModuleList({ modules, sortMethod, onSortChange, isAuthor = false }) {
                 }
             </Head>
             <div className="module-content">
-                <div className="field has-addons">
-                    <p className="control">
-                        <a className="button is-static">
-                            Sort
-                        </a>
-                    </p>
-                    <div className="select is-right">
-                        <select id="sortOrder" value={sortMethod} onChange={onSortChange}>
-                            <option>Downloads</option>
-                            <option>A to Z</option>
-                            <option>Z to A</option>
-                            <option>Last Update</option>
-                        </select>
+                
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', width: '100%', flexWrap: 'wrap' }}>
+                    
+                    <div style={{ flexGrow: 1, minWidth: '200px' }}>
+                        <input
+                            type="text"
+                            className="input" 
+                            placeholder="Search modules..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            style={{ ...darkInputStyle, width: '100%' }}
+                        />
+                    </div>
+                    <div className="field has-addons" style={{ marginBottom: 0 }}>
+                        <p className="control">
+                            <a className="button is-static" style={darkInputStyle}>
+                                Sort
+                            </a>
+                        </p>
+                        <div className="control">
+                            <div className="select">
+                                <select 
+                                    id="sortOrder" 
+                                    value={sortMethod} 
+                                    onChange={onSortChange}
+                                    style={darkInputStyle}
+                                >
+                                    <option>Downloads</option>
+                                    <option>A to Z</option>
+                                    <option>Z to A</option>
+                                    <option>Last Update</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={{ whiteSpace: 'nowrap', fontWeight: 'bold' }}>
+                        Showing {sortedModules.length} modules
                     </div>
                 </div>
+
                 <div className="module-cards">
                     <BrowserOnly>{() =>
                         sortedModules.map(module => (
@@ -144,6 +190,8 @@ function Modules() {
     const [modules, setModules] = useState([]);
     const [module, setModule] = useState(null);
     const [sortMethod, setSortMethod] = useState("Downloads");
+    const [searchQuery, setSearchQuery] = useState('');
+    
 
     useEffect(() => {
         const controller = new AbortController();
@@ -222,6 +270,8 @@ function Modules() {
                 modules={filteredModules}
                 sortMethod={sortMethod}
                 onSortChange={(event) => setSortMethod(event.target.value)}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
                 isAuthor={moduleAuthor != null}
             />
         );
