@@ -31,7 +31,7 @@ function ModuleList({ modules, sortMethod, onSortChange, searchQuery, setSearchQ
 
     const darkInputStyle = {
         backgroundColor: '#242526',
-        color: '#e3e3e3',
+        color: 'white',
         borderColor: '#444'
     };
 
@@ -81,18 +81,22 @@ function ModuleList({ modules, sortMethod, onSortChange, searchQuery, setSearchQ
                 }
             </Head>
             <div className="module-content">
-                
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', width: '100%', flexWrap: 'wrap' }}>
-                    
-                    <div style={{ flexGrow: 1, minWidth: '200px' }}>
-                        <input
-                            type="text"
-                            className="input" 
-                            placeholder="Search modules..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            style={{ ...darkInputStyle, width: '100%' }}
-                        />
+                    <div className="field has-addons" style={{ flexGrow: 1, minWidth: '200px', marginBottom: 0 }}>
+                        <p className="control">
+                            <a className="button is-static" style={darkInputStyle}>
+                                Search
+                            </a>
+                        </p>
+                        <p className="control is-expanded">
+                            <input
+                                type="text"
+                                className="input" 
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                style={darkInputStyle}
+                            />
+                        </p>
                     </div>
                     <div className="field has-addons" style={{ marginBottom: 0 }}>
                         <p className="control">
@@ -117,7 +121,7 @@ function ModuleList({ modules, sortMethod, onSortChange, searchQuery, setSearchQ
                         </div>
                     </div>
                     <div style={{ whiteSpace: 'nowrap', fontWeight: 'bold' }}>
-                        Showing {sortedModules.length} modules
+                        Showing {sortedModules.length} Modules
                     </div>
                 </div>
 
