@@ -357,7 +357,6 @@
 .module-content hr,
 .module-content h1,
 .module-content h2,
-.module-content h3,
 .module-content h4,
 .module-content h5,
 .module-content h6 {
@@ -10703,69 +10702,8 @@
 }
 .module-content .module-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  grid-gap: 1em;
-}
-.module-content .module-cards > .bhud-module-card {
-  background-color: #414344;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.module-content .module-cards > .bhud-module-card:hover {
-  background-color: #505354;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-module-hero {
-  width: 192px;
-  height: 192px;
-  float: left;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-module-hero > img {
-  border-radius: 8px 0px 0px 8px;
-  background: #38393A;
-  width: 100%;
-  height: 100%;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-card-stacked {
-  height: 192px;
-  padding: 1em;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-card-stacked > .bhud-card-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding-left: 1em;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-card-stacked > .bhud-card-content > .bhud-card-title {
-  flex-basis: 32px;
-  margin-bottom: 0.5em;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-card-stacked > .bhud-card-content > .bhud-card-title > .bhud-avatar {
-  float: left;
-  display: inline-block;
-  margin-right: 0.5em;
-  width: 32px;
-  height: 32px;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-card-stacked > .bhud-card-content > .bhud-card-title > .bhud-avatar > img {
-  border-radius: 32px;
-  width: 100%;
-  height: 100%;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-card-stacked > .bhud-card-content > .bhud-card-title > .bhud-module-line {
-  line-height: 32px;
-  white-space: nowrap;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-card-stacked > .bhud-card-content > .bhud-card-title > .bhud-module-line > .bhud-card-title {
-  font-weight: bold;
-  font-size: 22px;
-}
-.module-content .module-cards > .bhud-module-card > .bhud-card-stacked > .bhud-card-content > .content {
-  font-weight: 100;
-  text-overflow: ellipsis;
-  overflow-y: hidden;
-  font-size: 1em;
-  line-height: 120%;
+  grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+  grid-gap: 1.5em;
 }
 .module-content .box,
 .module-content .card {
@@ -10897,10 +10835,6 @@
     min-width: 1vw !important;
   }
 
-  .module-cards {
-    grid-template-columns: none !important;
-  }
-
   .bhud-module-card {
     background-color: #38393A !important;
     overflow: hidden;
@@ -10947,4 +10881,146 @@
     width: 100%;
     height: unset;
   }
+}
+
+:root {
+    --mc-bg-color: #2a2a2a;      /* Dark charcoal background for the card */
+    --mc-border-color: #3a3a3a;  /* Slightly lighter border/divider */
+    --mc-text-title: #ffffff;    /* White text for titles */
+    --mc-text-body: #b0b0b0;     /* Muted gray for summary text */
+    --mc-text-meta: #8c8c8c;     /* Darker gray for footer stats */
+    --mc-hover-bg: #333333;      /* Slightly lighter background on hover */
+}
+
+a.mc-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--mc-bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    color: var(--mc-text-body);
+    text-decoration: none;
+}
+
+a.mc-card:hover {
+    transform: translateY(-3px);
+    background-color: var(--mc-hover-bg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    color: var(--mc-text-body);
+    text-decoration: none;
+}
+
+a.mc-card:hover .mc-summary {
+    /* Ensure we can see the longer module descriptions */
+    -webkit-line-clamp: 20;
+}
+
+.mc-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #1a1a1a;
+}
+
+.mc-image-container img {
+    background-color: #38393a;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Maybe later for Mukluk showcase videos */
+.mc-video-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 14px;
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mc-body {
+    padding: 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.mc-title {
+    font-size: 1.25rem;
+    font-weight: bolder;
+    color: var(--mc-text-title);
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.content.mc-summary {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--mc-text-body);
+    margin-bottom: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mc-footer.level {
+    padding: 12px 16px;
+    margin-bottom: 0; /* Override Bulma default margin */
+    border-top: 1px solid var(--mc-border-color);
+    background-color: rgba(0,0,0,0.1);
+    font-size: 0.85rem;
+    color: var(--mc-text-meta);
+}
+
+/* Override Bulma's level alignment to ensure vertical centering */
+.mc-footer .level-left,
+.mc-footer .level-right {
+    display: flex;
+    align-items: center;
+}
+
+.mc-author {
+    display: flex;
+    align-items: center;
+}
+
+.mc-author img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%; /* Circular avatar */
+    margin-right: 8px;
+    border: 1px solid var(--mc-border-color);
+}
+
+.mc-author-name {
+    font-weight: 700;
+    color: var(--mc-text-body);
+    white-space: nowrap;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.mc-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+    line-height: 1.2;
+}
+
+.mc-stat-date {
+    white-space: nowrap;
 }
