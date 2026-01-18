@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 // Format numbers to k/m (e.g., 123400 -> 123.4k) (I hope to see a m some day!)
@@ -37,6 +37,8 @@ const timeAgo = (dateString) => {
 };
 
 export default function ModuleCard({ module }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   if (!ExecutionEnvironment.canUseDOM) {
       return <label>Wait...</label>
   }
@@ -49,11 +51,15 @@ export default function ModuleCard({ module }) {
   return (
       <a class="mc-card" target="_top" href={ `/modules/?module=${module.Namespace}` } >
         <div class="mc-image-container">
+          <div className="mc-skeleton"></div>
           <img
+            className={`mc-card-image ${isLoaded ? 'is-loaded' : ''}`}
             src={ moduleImgSrc }
+            onLoad={() => setIsLoaded(true)}
             onError={ (e) => {
               e.target.onerror = null;
               e.target.src = moduleImgFallback;
+              setIsLoaded(true);
             } }
             alt={`${module.Name} Image`}
           />
@@ -83,21 +89,36 @@ export default function ModuleCard({ module }) {
                     onError={ (e) => { e.target.onerror = null; e.target.src = avatarImgFallback; }}
                     alt={module.AuthorName}
                 />
-                <a class="mc-author-name" href={`/modules?author=${module.AuthorName}`}>
+                <a class="mc-author-name" href={`/modules/?author=${module.AuthorName}`}>
                     {module.AuthorName}
                 </a>
              </div>
           </div>
 
-          <div class="level-right">
-             <div class="mc-stats">
-                <span class="hint--left" data-hint={`${module.Downloads.toLocaleString()} Total Downloads`}>
-                  {formatDownloads(module.Downloads)}
+          <div className="level-right">
+            <div className="mc-stats">
+              <span className="hint--left" data-hint={`${module.Downloads.toLocaleString()} Total Downloads`}>
+                <svg class="mui-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24" aria-label="fontSize small"><path d="M19 9h-4V3H9v6H5l7 7zM5 18v2h14v-2z"></path></svg>
+
+                <span className="is-hidden-mobile">
+                  &nbsp;{formatDownloads(module.Downloads)}
                 </span>
-                <span class="mc-stat-date hint--left" data-hint={`Last Updated: ${new Date(module.LastUpdate).toLocaleDateString()}`}>
-                    {timeAgo(module.LastUpdate)}
+                <span className="is-hidden-tablet">
+                  &nbsp;{module.Downloads.toLocaleString()} Total Downloads
                 </span>
-             </div>
+              </span>
+
+              <span className="hint--left" data-hint={`Last Updated: ${new Date(module.LastUpdate).toLocaleDateString()}`}>
+                  <svg class="mui-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24" aria-label="fontSize small"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8"></path><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path></svg>
+                  
+                  <span className="is-hidden-mobile">
+                    &nbsp;{timeAgo(module.LastUpdate)}
+                  </span>
+                  <span className="is-hidden-tablet">
+                    &nbsp;Last Updated: {new Date(module.LastUpdate).toLocaleDateString()}
+                  </span>
+              </span>
+            </div>
           </div>
         </div>
       </a>
