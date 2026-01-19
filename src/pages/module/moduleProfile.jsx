@@ -266,7 +266,7 @@ export default function ModuleProfile({ namespace, module }) {
                             <div class="card-content" style={{ padding: "0", position: "relative", width: "100%", height: "0", paddingBottom: "56.25%" }}>
                                 <iframe 
                                 style={{ position: "absolute", width: "100%", height: "100%", left: "0", top: "0" }}
-                                width="550" height="275" src={module.MuklukVideo} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                width="550" height="275" src={module.MuklukVideo} title="YouTube video player" frameborder="0" allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
                         </div>
                     }

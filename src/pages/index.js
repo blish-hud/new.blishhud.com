@@ -71,21 +71,6 @@ const features = [
   },
 ];
 
-function Module({ imageUrl, title, description, module }) {
-  const imgUrl = useBaseUrl(imageUrl);
-  return (
-    <a href={`/modules/?module=${module}`} className={clsx('col col--3 module-card', styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} style={{ borderRadius:"8px", marginBottom:"1rem" }} />
-        </div>
-      )}
-      <h3 className="text--center">{title}</h3>
-      <p className="text--center">{description}</p>
-    </a>
-  );
-}
-
 function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
@@ -209,14 +194,15 @@ function Home() {
         <main>
           <section className={styles.features}>
             <div className="container" data-nosnippet>
-              <BrowserOnly>{() => (
-                <div className="row">
-                  {moduleShowcase.map((props, idx) => (
-                    <Module key={idx} {...props} />
-                  ))}
-                </div>
-              )}
-              </BrowserOnly>
+              <h2 className="hero__subtitle" style={{textAlign: "center", marginBottom: "2rem"}}>Discover Modules</h2>
+              <div className="module-cards">
+                <BrowserOnly>{() =>
+                    moduleShowcase.map((props, idx) => (
+                        <ModuleCard key={idx} module={{Namespace: props.module, Name: props.title, Downloads: 0, Summary: props.description}} />
+                    ))
+                }
+                </BrowserOnly>
+              </div>
             </div>
           </section>
           <div className={styles.buttons}>
@@ -226,7 +212,7 @@ function Home() {
                 styles.getStarted,
               )}
               to='/modules/'>
-              and 80+ more modules...
+              Browse All
             </Link>
           </div>
           <div className="container" style={{ display: "none" }}>
@@ -239,7 +225,7 @@ function Home() {
           <img src="/img/events-hero-half.png" className="ui-hero" />
         </main>
       )}
-      <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <header className={clsx('hero', styles.heroBanner)} style={{backgroundColor: "#303846"}}>
         <div className="container">
           <p className="hero__subtitle">For Developers</p>
           <h1 className="hero__title">{siteConfig.title} Module API</h1>

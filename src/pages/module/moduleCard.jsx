@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+import '../../css/module-card.css';
 
 // Format numbers to k/m (e.g., 123400 -> 123.4k) (I hope to see a m some day!)
 const formatDownloads = (num) => {
@@ -81,46 +82,48 @@ export default function ModuleCard({ module }) {
           </div>
         </div>
 
-        <div class="mc-footer level is-mobile">
-          <div class="level-left">
-             <div class="mc-author" title={`Created by ${module.AuthorName}`}>
-                <img
-                    src={ module.AuthorAvatar }
-                    onError={ (e) => { e.target.onerror = null; e.target.src = avatarImgFallback; }}
-                    alt={module.AuthorName}
-                />
-                <a class="mc-author-name" href={`/modules/?author=${module.AuthorName}`}>
-                    {module.AuthorName}
-                </a>
-             </div>
-          </div>
+        { module.AuthorName && (
+          <div class="mc-footer level is-mobile">
+            <div class="level-left">
+              <div class="mc-author" title={`Created by ${module.AuthorName}`}>
+                  <img
+                      src={ module.AuthorAvatar }
+                      onError={ (e) => { e.target.onerror = null; e.target.src = avatarImgFallback; }}
+                      alt={module.AuthorName}
+                  />
+                  <a class="mc-author-name" href={`/modules/?author=${module.AuthorName}`}>
+                      {module.AuthorName}
+                  </a>
+              </div>
+            </div>
 
-          <div className="level-right">
-            <div className="mc-stats">
-              <span className="hint--left" data-hint={`${module.Downloads.toLocaleString()} Total Downloads`}>
-                <svg class="mui-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24" aria-label="fontSize small"><path d="M19 9h-4V3H9v6H5l7 7zM5 18v2h14v-2z"></path></svg>
+            <div className="level-right">
+              <div className="mc-stats">
+                <span className="hint--left" data-hint={`${module.Downloads.toLocaleString()} Total Downloads`}>
+                  <svg class="mui-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24" aria-label="fontSize small"><path d="M19 9h-4V3H9v6H5l7 7zM5 18v2h14v-2z"></path></svg>
 
-                <span className="is-hidden-mobile">
-                  &nbsp;{formatDownloads(module.Downloads)}
-                </span>
-                <span className="is-hidden-tablet">
-                  &nbsp;{module.Downloads.toLocaleString()} Total Downloads
-                </span>
-              </span>
-
-              <span className="hint--left" data-hint={`Last Updated: ${new Date(module.LastUpdate).toLocaleDateString()}`}>
-                  <svg class="mui-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24" aria-label="fontSize small"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8"></path><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path></svg>
-                  
                   <span className="is-hidden-mobile">
-                    &nbsp;{timeAgo(module.LastUpdate)}
+                    &nbsp;{formatDownloads(module.Downloads)}
                   </span>
                   <span className="is-hidden-tablet">
-                    &nbsp;Last Updated: {new Date(module.LastUpdate).toLocaleDateString()}
+                    &nbsp;{module.Downloads.toLocaleString()} Total Downloads
                   </span>
-              </span>
+                </span>
+
+                <span className="hint--left" data-hint={`Last Updated: ${new Date(module.LastUpdate).toLocaleDateString()}`}>
+                    <svg class="mui-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24" aria-label="fontSize small"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8"></path><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path></svg>
+                    
+                    <span className="is-hidden-mobile">
+                      &nbsp;{timeAgo(module.LastUpdate)}
+                    </span>
+                    <span className="is-hidden-tablet">
+                      &nbsp;Last Updated: {new Date(module.LastUpdate).toLocaleDateString()}
+                    </span>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </a>
   );
 }
