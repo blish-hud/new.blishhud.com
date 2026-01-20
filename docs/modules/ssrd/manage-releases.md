@@ -1,6 +1,6 @@
 ---
 id: manage-releases
-title: Manage Releases
+title: Manage Module Releases
 ---
 
 ## Overview
