@@ -25,11 +25,11 @@ Releases in the prerelease repo are visible only to users who enable [Preview re
 
 ## Set release notes
 
-Release notes help users understand what changed in each version. They are shared in the [🎉release-feed](https://discord.gg/ryWP5Ct89S) Discord channel and on https://pkgs.blishhud.com/.
+Release notes help users understand what changed in each version. They are shared in the [🎉release-feed](https://discord.gg/ryWP5Ct89S) Discord channel and on https://blishhud.com/.
 
 <img src="/img/docs/ssrd/mr2.png" width="400"/>
 
-You can edit release notes at any time. Updates propagate to both Discord and the packages site.
+You can edit release notes at any time. Updates propagate to both Discord and the website.
 
 ## Release listing modifiers
 
