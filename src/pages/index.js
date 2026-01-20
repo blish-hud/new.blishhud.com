@@ -6,8 +6,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './index.module.css';
 import Head from '@docusaurus/Head';
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
 import './index.css';
 import ModuleCard from './module/moduleCard';
 import BrowserOnly from '@docusaurus/BrowserOnly';
@@ -143,11 +141,6 @@ function Home() {
     fetchRotation();
   }, []);
 
-  const items = [
-
-    // TODO: Put module tiles here.
-  ]
-
   return (
     <Layout
       title={``}
@@ -160,7 +153,8 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">Guild Wars 2's largest and most powerful addon overlay.</p>
-          <div className={styles.buttons}>
+          
+          <div className={styles.buttons} style={{ gap: "1rem", flexWrap: "wrap" }}>
             <Link
               className={clsx(
                 'button button--outline button--secondary button--lg link--download',
@@ -186,8 +180,11 @@ function Home() {
               Troubleshooting
             </Link>
           </div>
+          
           <br />
+
           <iframe width="640" height="360" src="https://www.youtube.com/embed/iLYYumF2SCY" frameBorder="0" allow="fullscreen; autoplay; encrypted-media; picture-in-picture" allowFullScreen></iframe>
+
         </div>
       </header>
       {moduleShowcase && moduleShowcase.length > 0 && (
@@ -205,6 +202,7 @@ function Home() {
               </div>
             </div>
           </section>
+          
           <div className={styles.buttons}>
             <Link
               className={clsx(
@@ -215,14 +213,8 @@ function Home() {
               Browse All
             </Link>
           </div>
-          <div className="container" style={{ display: "none" }}>
-            <div className="module-content">
-              <div className="module-cards" style={{ display: "default", gridTemplateColumns: "default" }}>
-                <AliceCarousel items={items} responsive={{ 0: { items: 2 } }} />
-              </div>
-            </div>
-          </div>
-          <img src="/img/events-hero-half.png" className="ui-hero" />
+          
+          <img src="/img/events-hero-half.png" className="ui-hero" alt="Events Hero" />
         </main>
       )}
       <header className={clsx('hero', styles.heroBanner)} style={{backgroundColor: "#303846"}}>

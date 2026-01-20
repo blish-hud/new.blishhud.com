@@ -1,20 +1,5 @@
-.module-card {
-    padding: 2em;
-    cursor:pointer;
-    border:1px solid transparent;
-    color:white;
-}
-
-.module-card:hover {
-    border:1px solid #333;
-    border-radius:6px;
-    color:white;
-    text-decoration: none;
-}
-
 .module-cards {
   display: grid;
-  /* 1. Center the grid content if it doesn't fill the full width */
   justify-content: center; 
   grid-gap: 1.5em;
   
@@ -23,7 +8,6 @@
 }
 
 /* TABLET: 2 columns (2x2) */
-/* Adjust '600px' to whatever width feels right for your design */
 @media (min-width: 600px) {
   .module-cards {
     grid-template-columns: repeat(2, 1fr);
@@ -31,7 +15,6 @@
 }
 
 /* DESKTOP: 4 columns (4x1) */
-/* Adjust '1000px' to when you have enough room for all 4 */
 @media (min-width: 1000px) {
   .module-cards {
     grid-template-columns: repeat(4, 1fr);
