@@ -168,7 +168,7 @@ function Home() {
               )}
               to='https://github.com/blish-hud/Blish-HUD/releases/latest/download/Blish.HUD.zip'>
               Download Latest
-            </Link>&nbsp;
+            </Link>
             <Link
               className={clsx(
                 'button button--outline button--secondary button--lg',
@@ -176,7 +176,7 @@ function Home() {
               )}
               to={useBaseUrl('docs/user/getting-started')}>
               Get Started
-            </Link>&nbsp;
+            </Link>
             <Link
               className={clsx(
                 'button button--outline button--secondary button--lg',
