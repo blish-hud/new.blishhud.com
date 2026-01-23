@@ -237,7 +237,7 @@ export default function ModuleProfile({ namespace, module }) {
                                             <tr style={{ backgroundColor: "#232833" }}>
                                                 <td style={{ whiteSpace: "nowrap" }}>{module.Name} v{release.Version ?? "Unknown"}&nbsp;&nbsp;{ release.IsPrerelease && (<span class="tag is-danger hint--top" data-hint="Prereleases are only visible if you have 'Preview releases' enabled in your Overlay Settings.">Prerelease</span>)}</td>
                                                 <td><HumanDate classes='hint--bottom' style={{ marginBottom: 0 }} timestamp={ release.ReleaseTimestamp } /></td>
-                                                <td>{ release.Downloads > 0 ? release.Downloads.toLocaleString() : "Unknown" }</td>
+                                                <td>{ release.Downloads > -1 ? release.Downloads.toLocaleString() : "Unknown" }</td>
                                                 <td>
                                                     <a target="_blank" rel="noreferrer noopener" href={release.DownloadUrl} class="" style={{ color: "white" }}>Download</a>
                                                 </td>
@@ -352,14 +352,14 @@ export default function ModuleProfile({ namespace, module }) {
                     if (e.target === e.currentTarget) setModalImageUrl(null);
                     }}
                     style={{
-                    position: "fixed",
-                    inset: 0,
-                    background: "rgba(0,0,0,0.85)",
-                    zIndex: 9999,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: "24px",
+                        position: "fixed",
+                        inset: 0,
+                        background: "rgba(0,0,0,0.85)",
+                        zIndex: 9999,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "24px",
                     }}
                 >
                     <img
