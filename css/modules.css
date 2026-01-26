@@ -10886,7 +10886,7 @@
 
 .anchor-header[id]:hover::after {
     content: " #";
-    color: #3273dc;
+    color: white;
     cursor: pointer;
     font-size: 0.8em;
     vertical-align: middle;
