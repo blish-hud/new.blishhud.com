@@ -10775,6 +10775,7 @@
 }
 .module-content .external-source h5 {
   font-size: 1rem;
+  font-weight: bold;
 }
 .module-content .external-source p {
   margin-bottom: 1em;
@@ -10881,4 +10882,17 @@
     width: 100%;
     height: unset;
   }
+}
+
+.anchor-header[id]:hover::after {
+    content: " #";
+    color: #3273dc;
+    cursor: pointer;
+    font-size: 0.8em;
+    vertical-align: middle;
+}
+
+.anchor-header {
+    scroll-margin-top: 4rem; 
+    position: relative;
 }
