@@ -21,40 +21,67 @@ export default function ModuleProfile({ namespace, module }) {
     // Tab and anchor handling.
     useEffect(() => {
         const hash = window.location.hash.replace("#", "");
-        if (!hash) {
+        if (!hash || hash === "profile" || hash === "releases") {
+            if (hash) setActiveTab(hash);
             return;
         }
 
-        // Hash matches a tab: just switch tabs.
-        if (hash === "profile" || hash === "releases") {
-            setActiveTab(hash);
-            return;
-        }
-
-        // Hash is an in-page anchor (e.g. #settings) inside the profile.
-        // Make sure the profile tab is active so the content is rendered.
         setActiveTab("profile");
 
         const scrollToAnchor = () => {
             const el = document.getElementById(hash);
             if (el) {
-                el.scrollIntoView({ behavior: "smooth", block: "start" });
+                el.scrollIntoView({ behavior: "auto", block: "start" });
                 return true;
             }
             return false;
         };
 
-        // Try immediately, and if not found, retry briefly while the DOM settles.
-        if (!scrollToAnchor()) {
-            const id = window.setInterval(() => {
-                if (scrollToAnchor()) {
-                    window.clearInterval(id);
-                }
-            }, 100);
+        scrollToAnchor();
 
-            return () => window.clearInterval(id);
-        }
-    }, [module.ProfileSource]);
+        const container = profileContainerRef.current;
+        if (!container) return;
+
+        let userInteracted = false;
+        const onTouchOrWheel = () => { userInteracted = true; };
+        window.addEventListener('wheel', onTouchOrWheel);
+        window.addEventListener('touchstart', onTouchOrWheel);
+
+        const observer = new ResizeObserver(() => {
+            if (!userInteracted) {
+                scrollToAnchor();
+            }
+        });
+
+        observer.observe(container);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('wheel', onTouchOrWheel);
+            window.removeEventListener('touchstart', onTouchOrWheel);
+        };
+    }, [module.ProfileSource, activeTab]);
+
+    // Wire the # anchor links
+    useEffect(() => {
+        const container = profileContainerRef.current;
+        if (!container) return;
+
+        const handleAnchorClick = (e) => {
+            const header = e.target.closest('.anchor-header');
+            
+            if (header && header.id) {
+                const rect = header.getBoundingClientRect();
+                const clickX = e.clientX;
+                
+                window.location.hash = header.id;
+                header.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        container.addEventListener('click', handleAnchorClick);
+        return () => container.removeEventListener('click', handleAnchorClick);
+    }, [activeTab]); // Runs once when tab switches to profile
 
     // Image modal handling.
     useEffect(() => {
