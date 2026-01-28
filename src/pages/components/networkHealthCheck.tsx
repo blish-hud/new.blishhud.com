@@ -78,7 +78,7 @@ async function checkResource(def: ResourceDef): Promise<CheckResult> {
 function generateReport(results: ResultsMap): string {
     const unixTime = Math.floor(Date.now() / 1000);
 
-    const lines = [`[Network Health Check Report](https://blishhud.com/docs/user/tools/network-troubleshooting) - <t:${unixTime}:R>`];
+    const lines = [`**Network Health Check Report** - <t:${unixTime}:R>`];
     lines.push("");
 
     RESOURCES.forEach((r) => {

@@ -25,6 +25,14 @@ We've come to learn that Deutsche Telekom AG customers may experience extreme sl
 
 The top right of each tile will indicate the amount of time (in milliseconds) a resource took to load.  If you're seeing times greater than 1000ms (1 second) there may be an issue with routing to our servers from your internet service provider.  If any of the requests fail (even on retry), your internet service provider may be blocking the request.
 
+## Is It Packet Loss?
+
+This tool primarily measures **Latency**. However, if you see results that vary wildly (e.g., jumping from 40ms to 500ms and back), you may be experiencing **Packet Loss**. To confirm this, we recommend running a long-form test via your Command Prompt:
+
+1. Press the Windows Key and type cmd.
+2. Type `ping -n 50 assets.gw2dat.com` or `ping -n 50 pkgs.blishhud.com` and press Enter.
+3. After 50 pings, look for the "Lost" percentage. Anything above 0% indicates a network stability issue.
+
 :::info Still need help?
 
 Join our Discord and paste of your network test results in our [#💢help](https://discord.gg/qJdUhdG) channel.
