@@ -146,16 +146,16 @@ export default function ModuleProfile({ namespace, module }) {
             <nav class="breadcrumb is-small" aria-label="breadcrumbs">
                 <ul>
                 <li><a href="/modules">Modules</a></li>
-                <li class="is-active"><a aria-current="page">{module.Name}</a></li>
+                <li class="is-active"><a aria-current="page">{ module.Name }</a></li>
                 </ul>
             </nav>
             <section class="hero">
                 <div class="media">
                     <div class="media-left" style={{ marginRight: "1.5rem" }}>
                         <figure class="">
-                            <img src={ `https://pkgs.blishhud.com/metadata/img/module/${namespace}.png` } alt="Module image" width="128" height="128" onError={(e) => {
+                            <img src={ module.ModuleImage } alt={ `${module.Name} hero image` } width="128" height="128" onError={(e) => {
                                 e.target.onerror = null;
-                                e.target.src = "/img/156027x2.png";
+                                e.target.src = "https://pkgs.blishhud.com/metadata/img/module/default.png";
                             }} style={{ borderRadius: "6px" }} />
                         </figure>
                     </div>

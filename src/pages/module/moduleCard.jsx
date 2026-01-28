@@ -44,10 +44,8 @@ export default function ModuleCard({ module }) {
       return <label>Wait...</label>
   }
 
-  const moduleImgFallback = "/img/156027x2.png";
+  const moduleImgFallback = "https://pkgs.blishhud.com/metadata/img/module/default.png";
   const avatarImgFallback = "https://assets.gw2dat.com/733268.png";
-
-  const moduleImgSrc = `https://pkgs.blishhud.com/metadata/img/module/${module.Namespace}.png`;
 
   return (
       <a class="mc-card" target="_top" href={ `/modules/?module=${module.Namespace}` } >
@@ -55,7 +53,7 @@ export default function ModuleCard({ module }) {
           <div className="mc-skeleton"></div>
           <img
             className={`mc-card-image ${isLoaded ? 'is-loaded' : ''}`}
-            src={ moduleImgSrc }
+            src={ module.ModuleImage != null ? module.ModuleImage : `https://pkgs.blishhud.com/metadata/img/module/${module.Namespace}.png` /* Fallback for home page rotation.json which doesn't include the ModuleImage because it is assumed it exists */ }
             onLoad={() => setIsLoaded(true)}
             onError={ (e) => {
               e.target.onerror = null;
