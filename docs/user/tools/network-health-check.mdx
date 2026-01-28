@@ -1,0 +1,31 @@
+---
+id: network-troubleshooting
+title: Network Troubleshooting
+---
+
+import NetworkHealthCheck from "@site/src/pages/components/networkHealthCheck";
+
+If you're encountering issues with Blish HUD remaining unresponsive for long periods of time at launch or other issues, this tool can help you identify if there is an issue connecting to Blish HUD's web APIs.
+
+:::warning Deutsche Telekom AG (DTAG) Peering
+
+We've come to learn that Deutsche Telekom AG fixed-line customers may experience extreme slowness or timeouts when accessing our domains. This is due to a long-standing peering dispute between DTAG and Cloudflare.
+
+**Possible Workarounds:**
+* **Use a VPN:** This changes your routing path and typically resolves the issue immediately.
+* **Switch to Mobile Data:** If your mobile provider is not DTAG (e.g., O2 or Vodafone), it may load instantly.
+:::
+
+## Network Troubleshooting
+
+<NetworkHealthCheck />
+
+## Understanding Your Results
+
+The top right of each tile will indicate the amount of time (in milliseconds) a resource took to load.  If you're seeing times greater than 1000ms (1 second) there may be an issue with routing to our servers from your internet service provider.  If any of the requests fail (even on retry), your internet service provider may be blocking the request.
+
+:::info Still need help?
+
+Join our Discord and paste of your network test results in our [#💢help](https://discord.gg/qJdUhdG) channel.
+
+:::
