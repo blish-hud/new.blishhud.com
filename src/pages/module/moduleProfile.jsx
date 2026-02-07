@@ -259,7 +259,7 @@ export default function ModuleProfile({ namespace, module }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    { module.Releases.map(release => (
+                                    { module.Releases != null && module.Releases.map(release => (
                                         <React.Fragment key={release.Version}>
                                             <tr style={{ backgroundColor: "#232833" }}>
                                                 <td style={{ whiteSpace: "nowrap" }}>{module.Name} v{release.Version ?? "Unknown"}&nbsp;&nbsp;{ release.IsPrerelease && (<span class="tag is-danger hint--top" data-hint="Prereleases are only visible if you have 'Preview releases' enabled in your Overlay Settings.">Prerelease</span>)}</td>
