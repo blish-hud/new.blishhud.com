@@ -247,7 +247,7 @@ export default function ModuleProfile({ namespace, module }) {
                     { activeTab == "releases" && (
                         <div class="box external-source" style={{ borderRadius: "0 0 6px 6px" }}>
                             <div class="notification is-info">
-                                For the best experience, download modules through the Blish HUD <strong>Module Repo</strong>.  If you download a module file (.bhm) with your browser, you will need to <a target="_blank" href="/docs/user/installing-modules#manually-installing-modules">install it manually</a>.
+                                For the best experience, download modules through the Blish HUD <strong>Module Repo</strong>.  If you download a module file (.bhm) with your browser, you will need to <a target="_blank" href="/docs/user/guides/installing-modules#manually-installing-modules">install it manually</a>.
                             </div>
                             <table class="table" style={{ fontSize: "0.9rem", width: "100%" }}>
                                 <thead>
