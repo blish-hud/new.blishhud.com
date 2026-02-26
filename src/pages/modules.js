@@ -120,7 +120,7 @@ function ModuleList({ modules, sortMethod, onSortChange, searchQuery, setSearchQ
                             </div>
                         </div>
                     </div>
-                    <div style={{ whiteSpace: 'nowrap', fontWeight: 'bold' }}>
+                    <div style={{ whiteSpace: 'nowrap', fontWeight: 'bold', paddingRight: '1rem' }}>
                         Showing {sortedModules.length} Modules
                     </div>
                 </div>
