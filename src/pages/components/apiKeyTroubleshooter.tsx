@@ -130,7 +130,6 @@ function classify(results: Results) {
       title: "Token validation failed",
       bullets: [
         "The tokeninfo endpoint didn’t return a valid response.",
-        "If this is a network/CORS issue, try another browser or disable blocking extensions.",
         "If the Guild Wars 2 API is down, retry later.",
       ],
     };
