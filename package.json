@@ -22,7 +22,7 @@
     "react": "^18.2.0",
     "react-alice-carousel": "^2.6.4",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.2"
+    "react-router-dom": "^6.30.3"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.0.0",
