@@ -6,7 +6,7 @@ title: Main Blish HUD window is empty
 
 ## Example
 
-![image](https://user-images.githubusercontent.com/1950594/229578700-af253869-82d3-4282-b046-6e4ad5f36475.png)
+![image](https://static.blishhud.com/user-page-media/229578700-af253869-82d3-4282-b046-6e4ad5f36475.png)
 
 ## Solution
 

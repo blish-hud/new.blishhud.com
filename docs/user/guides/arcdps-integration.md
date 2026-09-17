@@ -20,7 +20,7 @@ Enabling this integration can be done one of two ways.
 
 Our integration can be automatically added to your ArcDPS install using [GW2-UOAOM](https://github.com/gw2-addon-loader/GW2-Addon-Manager).  From the list of Add-Ons, ensure that "ArcDPS" and "ArcDPS Blish HUD Integration" are both checked.
 
-![Addon-Manager Screenshot](https://user-images.githubusercontent.com/30479162/89721621-b697a480-d994-11ea-88d7-8b5bc0200272.jpg)
+![Addon-Manager Screenshot](https://static.blishhud.com/user-page-media/89721621-b697a480-d994-11ea-88d7-8b5bc0200272.jpg)
 
 ## Manually
 

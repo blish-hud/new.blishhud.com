@@ -6,7 +6,7 @@ title: Blish HUD shows partially transparent
 
 ## Example
 
-![image](https://user-images.githubusercontent.com/1950594/186519910-077dabc9-ed9b-4128-8ca8-b7fb9f011ace.png)
+![image](https://static.blishhud.com/user-page-media/186519910-077dabc9-ed9b-4128-8ca8-b7fb9f011ace.png)
 
 ## Overview
 
