@@ -28,11 +28,11 @@ By default, Blish HUD is configured to **match your monitor refresh rate**.  If 
 
 Those with an integrated GPU (iGPU) and a dedicated GPU may find that their performance issues are caused by either Blish HUD, Guild Wars 2, or both running on the wrong GPU.  In your computer settings under **System > Display > Graphics** ensure that both Guild Wars 2 and Blish HUD are configured to use your high-performance GPU.
 
-<video src='https://user-images.githubusercontent.com/1950594/223299168-60de137a-d01d-47f5-94e7-d7de95d194d2.mp4' controls='controls' muted='muted'></video>
+<video src='https://static.blishhud.com/user-page-media/223299168-60de137a-d01d-47f5-94e7-d7de95d194d2.mp4' controls='controls' muted='muted'></video>
 
 You will know you've done this successfully if both applications are shown as using the same GPU engine in Task Manager:
 
-![image](https://user-images.githubusercontent.com/1950594/223299509-de8e387d-0dd8-42e9-a585-5d12f3ecf11f.png)
+![image](https://static.blishhud.com/user-page-media/223299509-de8e387d-0dd8-42e9-a585-5d12f3ecf11f.png)
 
 _In this case, the dedicated GPU is **GPU 0**, but it may be **GPU 1** for you._
 

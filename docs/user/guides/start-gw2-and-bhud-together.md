@@ -18,7 +18,7 @@ _Other options:_
 
 That means your Blish HUD shortcut will essentially do both jobs for you.
 
-![iZ2GH0K](https://user-images.githubusercontent.com/1950594/197849956-9e94a88d-5928-4945-985b-cfa4c761bb3e.png)
+![iZ2GH0K](https://static.blishhud.com/user-page-media/197849956-9e94a88d-5928-4945-985b-cfa4c761bb3e.png)
 
 Here is the exact bit added at the end:
 
