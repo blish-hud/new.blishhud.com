@@ -91,6 +91,8 @@ const sidebars = {
         "modules/ssrd/registering-modules",
         "modules/ssrd/manage-releases",
         "modules/ssrd/manage-profile",
+        "modules/ssrd/error-reports",
+        "modules/ssrd/author-profile",
         "modules/ssrd/additional-services"
       ]
     }

@@ -5,39 +5,46 @@ title: Registering Modules
 
 ## Overview
 
-Modules are registered by their Git URI. A single repository can contain multiple modules, and SSRD will import each detected module for you.
+Modules are registered by their Git URI. A single repository can contain multiple modules, and SSRD finds each one for you.
 
 ## Registering a module
 
-To register a module, first locate the Git URI for your repository. It will end in `.git`.
-
 #### 1. Copy the Git URI from your repository
+On GitHub, open the **Code** menu and copy the HTTPS URI. It ends in `.git`.
+
 <img src="/img/docs/ssrd/gituri.png" />
 
-#### 2. Paste the URI into the `Add Module Repository` page in SSRD
+#### 2. Submit it on the Register Module page
+On the **Modules** page, select **Add Module**, paste the URI into **Module Repo** and select **Submit**.
+
 <img src="/img/docs/ssrd/register-module.png" />
 
-#### 3. Register the detected modules
-You will see the manifest for each module found in the repository. Add each module you want to manage, then continue to the main Modules page.
+#### 3. Register the modules you want
+SSRD shows the manifest of each module it found in the repository. Select **Register** on each module you want to manage, or **Skip** to leave it out. When you're done, select **Go to Modules**.
 
-*An older recording of this process is available below; some UI elements have changed since it was created.*
+<img src="/img/docs/ssrd/select-manifests.png" />
 
-<div style={{position: "relative", paddingBottom: "calc(52.86% + 44px)" }}>
-<iframe src="/img/docs/ssrd/ssrd.webm" frameborder='0' scrolling='no' width='100%' height='100%' style={{position: "absolute", top:0, left:0}} allowfullscreen></iframe>
-</div>
+## Private repositories
 
-## Webhooks
+Private repositories can be registered too:
 
-Add a webhook to your repository so SSRD can automatically refresh your module manifests when you push changes. If the repository contains multiple modules, a single webhook will update all of them.
+1. Give our `org@blishhud.com` GitHub account read access to your repository.
+2. Submit the repository's Git URI as usual.
+3. SSRD asks you to prove you can push to the repository. Create a file named `.ssrd-verify` at the root of the default branch containing the code shown, then commit and push it.
+4. Select **Verify**. Once your modules are registered, you can delete the file.
 
-To get the webhook URL, hover over the arrow in the top-right corner of your module and copy the **Push Webhook** from the menu.
-<img src="/img/docs/ssrd/push-webhook.png" />
+<img src="/img/docs/ssrd/verify-repo.png" />
 
-Configure the webhook to trigger only on **Push** events. This keeps your module manifest current for release management and features such as static content hosting.
+The code only works for your account and that repository, and lasts 30 days.
+
+## Keeping manifests up to date
+
+SSRD watches your repository and picks up new pushes on its own, usually within about 10 minutes. If your repository has multiple modules, all of them are updated.
+
+To pick up a push right away, select the refresh button on your module's **Releases** page. The time next to it shows when the manifest was last updated.
 
 ## Remarks
 
-- SSRD only supports modules hosted on GitHub.
-- To add a private GitHub repo to SSRD, first grant our `org@blishhud.com` account read access to the repo.
-- Modules must include all dependencies that SSRD can resolve from the same repository. If your module depends on another project outside the repo, either include the shared library DLL in the module repo or publish it as a NuGet package.
-- User-facing error messages are limited. If something unexpected happens, please let Freesnöw know so it can be investigated.
+- SSRD works best with modules hosted on GitHub. Repositories on other Git hosts can be registered too, but some features may be limited and support for them is not guaranteed.
+- Everything your module needs to build must be in the same repository. If your module depends on a project outside the repo, either include the shared library DLL in the module repo or publish it as a NuGet package.
+- If something unexpected happens, please let Freesnöw know so it can be looked into.

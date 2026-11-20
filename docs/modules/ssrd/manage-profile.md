@@ -5,54 +5,68 @@ title: Manage Module Profile
 
 ## Overview
 
-SSRD lets you customize how your module is portrayed on https://blishhud.com/modules.  There are 5 fields to consider.
+A module's **Profile** page sets how your module is shown on https://blishhud.com/modules. Open it by selecting **Profile** next to your module on the **Modules** page. Select **See Live Profile** to view the published result.
+
+<img src="/img/docs/ssrd/profile.png" />
+
+## Show Publicly
+
+**Show Publicly** lists your module on https://blishhud.com/modules.
+
+## Show in Rotation
+
+**Show in Rotation** adds your module to the rotating **Discover Modules** section on the https://blishhud.com/ home page. A module qualifies for the rotation when:
+
+- A module summary is set.
+- A profile page is written, or the module has been featured in a Mukluk showcase video.
+- A module hero image is set.
+- The module has at least one visible release that isn't a prerelease.
+
+If your module doesn't qualify yet, the page lists what's missing.
 
 ## Module Summary
 
 :::warning
-This field *does not* support markdown or any other kind of formatting.  For more complicated profiles, you'll need to provide a **Profile Post**.
+This field *does not* support Markdown or any other kind of formatting. Use the **Profile Page** for anything longer.
 :::
 
-The **Module Summary** is a short description of your module. It should quickly describe the purpose of your module in a way that captures the users attention.
+The **Module Summary** is a short description of your module, up to 200 characters. It should quickly describe the purpose of your module in a way that captures the user's attention.
 
 It is used for:
 1. The short description shown below the module image on https://blishhud.com/modules.
-2. The metadata provided to Google search for your module's page.
-3. The fallback text shown on your module's page if no **Profile Post** is provided.
+2. The description Google shows for your module's page.
+3. The text shown on your module's page if no **Profile Page** is written.
 
 <img style={{border: "1px solid lightblue"}} src="/img/docs/ssrd/mp-google-result.png" />
 <img style={{border: "1px solid lightblue"}} src="/img/docs/ssrd/mp-module-card-description.png" />
 
-## Profile Post
-
-The **Profile Post** is a *link* to a GitHub discussion post.  SSRD will pull the source of your discussion post to populate your module's description on the website.
-
-<img style={{border: "1px solid lightblue"}} src="/img/docs/ssrd/mp-profile-post.png" />
-
-For example:
-| Source Discussion Post | Resulting Module Page |
-| - | - |
-| https://github.com/blish-hud/Pathing/discussions/79 | https://blishhud.com/modules/?module=bh.community.pathing |
-| https://github.com/dlamkins/BagOfHolding/discussions/1 | https://blishhud.com/modules/?module=fs.bagofholding |
-| https://github.com/blish-hud/Community-Module-Pack/discussions/148 | https://blishhud.com/modules/?module=bh.general.discordrp |
-
-### Your module's profile supports:
-- Much of the extended markdown support that GitHub provides (including [collapsible sections](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections)).
-- Images, GIFs, and video that you upload to your discussion post.
-- Embeddeding YouTube videos (just provide a standard link to a YouTube video and SSRD will convert it to an embedded video in your module's description).
-
-:::info
-SSRD provides you with a webhook at the bottom of the profile page.  You can configure GitHub to call this webhook anytime you make changes to your discussion post to have SSRD automatically update your module's profile.
-:::
-
 ## Issues & Suggestions
 
-The **Issues** and **Suggestions** fields allow you to add a URL that users will see on your module profile page as **Report a Bug** and **Suggest an Idea**.
+The **Issues** and **Suggestions** fields add links that users see on your module's page as **Report a Bug** and **Suggest an Idea**.
 
 <img style={{border: "1px solid lightblue"}} src="/img/docs/ssrd/mp-issue-idea.png" />
 
-If the field is left blank, the corresponding button will not be shown.  These fields most typically point to GitHub issue pages or discussion pages - however you'd best like to receive feedback.
+If a field is left blank, its button isn't shown. These usually point to GitHub issues or discussions, but they can go wherever you'd like to receive feedback.
 
 ## Module Hero
 
-The **Module Hero** is the module image shown with your module. It should be at least 192x192 but must be 256x256 or less. The image must be square (1:1) or the upload will be ignored.
+The **Module Hero** is the module image shown with your module. Upload a square (1:1) PNG of at least 192x192 and no more than 256x256. Select **Reset to default** to go back to the default image.
+
+## Profile Page
+
+The **Profile Page** is the full description shown on your module's page. Write it in Markdown in the editor at the bottom of the **Profile** page, then select **Save**.
+
+<img src="/img/docs/ssrd/profile-editor.png" />
+
+The editor supports:
+- Much of the Markdown that GitHub supports, including tables and [collapsible sections](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections).
+- Images and GIFs. Paste or drop them into the editor, or use the image button, and they're uploaded for you.
+- YouTube videos. Use the YouTube button, or paste a link to a video on its own line, and it's embedded in your module's page.
+- A **Preview** tab to check how your profile will look before you save it.
+
+For example:
+| Module | Profile |
+| - | - |
+| Pathing | https://blishhud.com/modules/?module=bh.community.pathing |
+| Bag of Holding | https://blishhud.com/modules/?module=fs.bagofholding |
+| Discord Rich Presence | https://blishhud.com/modules/?module=bh.general.discordrp |
