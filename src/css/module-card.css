@@ -155,10 +155,25 @@ a.mc-card:hover .mc-summary {
     width: 100%;
     height: 100%;
     z-index: 0;
-    
-    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
-    background-size: 200% 100%;
+    overflow: hidden;
+    background-color: #2a2a2a;
+}
+
+.mc-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, #3a3a3a 50%, transparent 100%);
+    transform: translateX(-100%);
+    will-change: transform;
     animation: mc-loading 1.5s infinite linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mc-skeleton::after {
+        animation: none;
+        display: none;
+    }
 }
 
 .mc-card-image {
@@ -178,6 +193,6 @@ a.mc-card:hover .mc-summary {
 }
 
 @keyframes mc-loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }

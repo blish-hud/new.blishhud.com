@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import '../../css/module-card.css';
 
+let downloadsFormatter = null;
+
 // Format numbers to k/m (e.g., 123400 -> 123.4k) (I hope to see a m some day!)
 const formatDownloads = (num) => {
   if (!num || isNaN(num)) return '0';
 
-  const formatter = new Intl.NumberFormat(undefined, {
+  const formatter = downloadsFormatter ??= new Intl.NumberFormat(undefined, {
     maximumFractionDigits: 1,
     minimumFractionDigits: 0,
   });
@@ -57,9 +59,13 @@ export default function ModuleCard({ module }) {
   return (
     <a class="mc-card" target="_top" href={`/modules/?module=${module.Namespace}`} >
       <div class="mc-image-container">
-        <div className="mc-skeleton"></div>
+        {!isLoaded && <div className="mc-skeleton"></div>}
         <img
           className={`mc-card-image ${isLoaded ? 'is-loaded' : ''}`}
+          loading="lazy"
+          decoding="async"
+          width="256"
+          height="256"
           src={module.ModuleImage != null ? module.ModuleImage : `https://pkgs.blishhud.com/metadata/img/module/${module.Namespace}.png` /* Fallback for home page rotation.json which doesn't include the ModuleImage because it is assumed it exists */}
           onLoad={() => setIsLoaded(true)}
           onError={(e) => {
@@ -93,6 +99,10 @@ export default function ModuleCard({ module }) {
             <div class="mc-author" title={`Created by ${module.AuthorName}`}>
               <img
                 src={module.AuthorAvatar}
+                loading="lazy"
+                decoding="async"
+                width="28"
+                height="28"
                 onError={(e) => { e.target.onerror = null; e.target.src = avatarImgFallback; }}
                 alt={module.AuthorName}
               />

@@ -84,6 +84,46 @@ function Feature({ imageUrl, title, description }) {
   );
 }
 
+function YouTubeFacade({ videoId, title }) {
+  const [playing, setPlaying] = useState(false);
+
+  if (playing) {
+    return (
+      <iframe
+        className={styles.videoFrame}
+        src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+        title={title}
+        frameBorder="0"
+        allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
+        allowFullScreen></iframe>
+    );
+  }
+
+  return (
+    <a
+      className={styles.videoFrame}
+      href={`https://www.youtube.com/watch?v=${videoId}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Play video: ${title}`}
+      onClick={(e) => { e.preventDefault(); setPlaying(true); }}>
+      <img
+        className={styles.videoThumb}
+        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        alt=""
+        width="640"
+        height="360"
+        decoding="async" />
+      <span className={styles.videoPlay} aria-hidden="true">
+        <svg viewBox="0 0 68 48" width="68" height="48">
+          <path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.3.3 34 .3 34 .3s-21.3 0-26.6 1.4c-2.9.8-5.1 3.1-5.9 6C.1 13 .1 24 .1 24s0 11 1.4 16.3c.8 2.9 3 5.2 5.9 6 5.3 1.4 26.6 1.4 26.6 1.4s21.3 0 26.6-1.4c2.9-.8 5.1-3.1 5.9-6 1.4-5.3 1.4-16.3 1.4-16.3s0-11-1.4-16.3z" fill="#f00" />
+          <path d="M45 24 27 14v20z" fill="#fff" />
+        </svg>
+      </span>
+    </a>
+  );
+}
+
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
@@ -183,7 +223,7 @@ function Home() {
           
           <br />
 
-          <iframe width="640" height="360" src="https://www.youtube.com/embed/iLYYumF2SCY" frameBorder="0" allow="fullscreen; autoplay; encrypted-media; picture-in-picture" allowFullScreen></iframe>
+          <YouTubeFacade videoId="iLYYumF2SCY" title="Setting up Blish HUD (Guild Wars 2 Overlay)" />
 
         </div>
       </header>
@@ -214,7 +254,7 @@ function Home() {
             </Link>
           </div>
           
-          <img src="/img/events-hero-half.png" className="ui-hero" alt="Events Hero" />
+          <img src="/img/events-hero-half.png" className="ui-hero" alt="Events Hero" loading="lazy" decoding="async" />
         </main>
       )}
       <header className={clsx('hero', styles.heroBanner)} style={{backgroundColor: "#303846"}}>
