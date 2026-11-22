@@ -137,11 +137,15 @@ A url that can be used to link to the project or a link to more details instruct
 ### Optional Attributes
 
 #### Directories
-A list of directory names that are used by the module.  These directories will be registered by the `FileService` and a button to open the directory directly will be shown in the module settings.  Do not include subfolders (e.g. `"markers/data"`) in your manifest - they are not supported in the manifest and your module must manage those directly.
+A list of directory names that are used by the module.  These directories will be registered by the `FileService` and a button to open the directory directly will be shown in the module settings.
+
+Subfolders are allowed, which is useful if you publish several modules and want to keep their folders together (e.g. `"YourName/YourModule"`).  Get the path with the same name you listed: `DirectoriesManager.GetFullDirectoryPath("YourName/YourModule")`.
+
+Each directory must be a relative path.  It can't start with a slash, include a drive letter, use `.` or `..` as a folder name, contain empty folder names (`a//b`) or end with a slash.  Folder names can't use `< > : " | ? *` or Windows reserved names such as `con` or `nul`.
 
 ```json
 {
-    "directories": ["markers"]
+    "directories": ["markers", "YourName/YourModule"]
 }
 ```
 
@@ -150,14 +154,16 @@ Allows the module to continue to run when GW2 is not running and Blish HUD is st
 
 ```json
 {
-    "enabled_without_gw2": false
+    "enable_without_gw2": false
 }
 ```
 
 #### API Permissions
 Gives the module permission to access the specified API permissions.  A permission can be marked as optional if the functionality of the module does not rely on the permission (the module must check for this).  A description can also be provided to provide justification to the end user as to why the permission is needed.
 
-If no API permissions are needed, do not include `api_permissions` at all.
+`api_permissions` is an object keyed by permission name.
+
+The available permissions are `account`, `builds`, `characters`, `guilds`, `inventories`, `progression`, `pvp`, `tradingpost`, `unlocks` and `wallet`.
 
 ```json
 {
